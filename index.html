@@ -118,10 +118,10 @@ nav a:hover { opacity: 1; }
 .hero > * { position: relative; z-index: 1; }
 
 .hero h1 {
-  font-size: 58px;
+  font-size: 48px;
   line-height: 1.14;
   letter-spacing: -0.035em;
-  max-width: 980px;
+  max-width: 1200px;
   margin: 0 auto 26px;
   color: #ffffff;
   font-weight: 700;
@@ -398,7 +398,7 @@ nav a:hover { opacity: 1; }
 }
 
 .features-intro h2 {
-  font-size: 30px;
+  font-size: 28px;
   line-height: 1.3;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -413,7 +413,7 @@ nav a:hover { opacity: 1; }
 
 .feature-card {
   position: relative;
-  height: 220px;
+  height: 150px;
   border-radius: 18px;
   background: #ffffff;
   border: 1px solid #e5e7eb;
@@ -479,7 +479,7 @@ nav a:hover { opacity: 1; }
 
 .stat-highlight {
   font-weight: 700;
-  font-size: 1.15em;
+  font-size: 1em;
   padding: 0 6px;
   background: linear-gradient(135deg, #0b3d2e, #1e7a5a);
   -webkit-background-clip: text;
@@ -490,9 +490,8 @@ nav a:hover { opacity: 1; }
 /* ================= CAROUSEL ================= */
 .carousel {
   background:
-    radial-gradient(1200px 500px at 20% 10%, rgba(30,122,90,0.16), transparent 60%),
-    radial-gradient(900px 420px at 80% 20%, rgba(11,61,46,0.14), transparent 62%),
-    linear-gradient(135deg, #eef6f2 0%, #f5faf8 50%, #ffffff 100%);
+    radial-gradient(900px 500px at 50% 0%, rgba(30,122,90,0.25), transparent 60%),
+    linear-gradient(180deg, #eaf3ef 0%, #f8fbf9 50%, #ffffff 100%);
   padding: var(--section-y) 0;
   border-top: 1px solid rgba(15, 23, 42, 0.06);
 }
@@ -552,24 +551,25 @@ nav a:hover { opacity: 1; }
 }
 
 .carousel-media {
-  width: 100%;
-  max-width: 980px;
-  height: 430px;
-  display: block;
+  width: fit-content;        
+  max-width: 100%;
   margin: 0 auto 28px;
   border-radius: 16px;
   overflow: hidden;
-  background: rgba(255,255,255,0.65);
-  border: 1px solid rgba(11,61,46,0.12);
-  box-shadow: 0 24px 60px rgba(15,23,42,0.10);
+  background: transparent;   
+  border: none;              
+  box-shadow: none;          
 }
 
+
 .carousel-media img,
-.carousel-media video{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+.carousel-media video {
   display: block;
+  max-width: 820px;   /* 🔥 controls size */
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);            
 }
 
 .carousel-btn {
@@ -659,9 +659,11 @@ nav a:hover { opacity: 1; }
 /* ================= OUTCOMES ================= */
 .outcomes {
   position: relative;
-  padding: var(--section-y) 0;
+  padding: var(--section-y-tight) 0;
   overflow: hidden;
   border-top: 1px solid rgba(15, 23, 42, 0.06);
+  padding-bottom: 0px;
+
 
   background:
     radial-gradient(1000px 420px at 18% 10%, rgba(34,197,94,0.10), transparent 60%),
@@ -806,7 +808,8 @@ nav a:hover { opacity: 1; }
 
 /* outcomes CTA row */
 .outcomes-cta{
-  margin-top: 22px;
+  margin-top: 28px;
+  margin-bottom: 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1164,6 +1167,42 @@ footer {
     background-size: 92% auto;
   }
 }
+.testimonials-section{
+  padding: var(--section-y-tight) 0;
+  text-align: center;
+  border-top: 1px solid rgba(15,23,42,0.06);
+  background: #ffffff;
+}
+
+.testimonials-section h2{
+  font-size: 36px;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  margin-bottom: 0px;
+}
+
+.testimonials-sub{
+  font-size: 16px;
+  color: #475569;
+  max-width: 720px;
+  margin: 0 auto 48px;
+}
+
+.testimonials-grid{
+  max-width: 920px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+@media (max-width: 900px){
+  .testimonials-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+
 
     
   </style>
@@ -1176,11 +1215,11 @@ footer {
     <img src="images/Device Control Plus_Black.png" alt="Device Control Plus">
   </div>
   <nav>
-    <a href="#">Features</a>
-    <a href="#">Demo</a>
-    <a href="#">Documents</a>
-    <a href="#">Get Quote</a>
-    <a href="#">Support</a>
+    <a href="https://www.manageengine.com/device-control/features.html">Features</a>
+    <a href="https://www.manageengine.com/device-control/request-demo.html">Demo</a>
+    <a href="https://www.manageengine.com/device-control/help.html">Documents</a>
+    <a href="https://www.manageengine.com/device-control/get-quote.html">Get Quote</a>
+    <a href="https://www.manageengine.com/device-control/support.html">Support</a>
   </nav>
 </header>
 
@@ -1260,17 +1299,6 @@ footer {
         <div class="stat"><h3>2000+</h3><p>organizations worldwide</p></div>
       </div>
 
-      <div class="testimonials">
-        <div class="testimonial">
-          <p>“Immediate visibility and painless enforcement across endpoints.”</p>
-          <span>— IT Security Manager</span>
-        </div>
-        <div class="testimonial">
-          <p>“Audit-first rollout reduced risk without impacting productivity.”</p>
-          <span>— Head of Infrastructure</span>
-        </div>
-      </div>
-
     </div>
   </section>
 
@@ -1285,7 +1313,7 @@ footer {
         <span class="stat-highlight">$8.76M</span>
         each year, and
         <span class="stat-highlight">90%</span>
-        report vulnerability through removable devices.
+        of the organizations feel vulnerable to insider threats via removabledevices.
       </h2>
     </div>
 
@@ -1315,7 +1343,7 @@ footer {
         </div>
       </a>
 
-      <a href="/usb-encryption.html" class="feature-card core">
+      <a href="https://www.manageengine.com/device-control/usb-encryption.html" class="feature-card core">
         <div class="feature-front">
           <h3>Enforce USB encryption</h3>
         </div>
@@ -1382,7 +1410,7 @@ footer {
 
           <div class="carousel-media">
             <video autoplay muted loop playsinline>
-              <source src="videos/unmanaged.mp4" type="video/mp4">
+              <source src="videos/usbblock.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -1394,9 +1422,7 @@ footer {
           </div>
 
           <div class="carousel-media">
-            <video autoplay muted loop playsinline>
-              <source src="videos/jit.mp4" type="video/mp4">
-            </video>
+              <img src="images/Screenshot 2026-01-27 104837.png" alt="Device Control screenshot">
           </div>
         </div>
 
@@ -1419,7 +1445,7 @@ footer {
 
           <div class="carousel-media">
             <video autoplay muted loop playsinline>
-              <source src="videos/adminrights.mp4" type="video/mp4">
+              <source src="videos/jit.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -1437,9 +1463,9 @@ footer {
   <div class="outcomes-container">
 
     <div class="outcomes-head">
-      <h2 class="outcomes-title">Security wins your teams actually feel</h2>
+      <h2 class="outcomes-title">Security that delivers measurable outcomes</h2>
       <p class="outcomes-sub">
-        Reduce removable-device risk without disrupting daily work — control access, prove compliance, and prevent leakage.
+        Less removable-device risk, simpler compliance, and no impact on how teams work.
       </p>
     </div>
 
@@ -1485,14 +1511,30 @@ footer {
 </div>
 
 </div>
+<section class="testimonials-section">
+  <div class="container">
+
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <p>“Immediate visibility and painless enforcement across endpoints.”</p>
+        <span>— IT Security Manager</span>
+      </div>
+
+      <div class="testimonial">
+        <p>“Audit-first rollout reduced risk without impacting productivity.”</p>
+        <span>— Head of Infrastructure</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 </section>
 
 <section class="eval-soft">
   <div class="eval-wrap">
-    <h2>Ready to evaluate safely?</h2>
+    <h2>Ready to evaluate?</h2>
     <p class="eval-lead">
-      Start in audit mode and gain visibility without risk.
-      Choose what fits your scale.
+      See how Device Control Plus works in your environment
     </p>
 
     <div class="eval-layout">
