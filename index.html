@@ -8,1254 +8,1225 @@
   <!-- Inter Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
-  :root {
-  --green-900: #0B3D2E;
-  --green-800: #124F3B;
-  --green-700: #1E7A5A;
+  :root{
+  /* ✅ Brand-aligned emerald */
+  --blue:#0B3D2E;        /* deep emerald (primary) */
+  --blue-2:#19A974;      /* vibrant accent green */
 
-  --red: #C62828;
-  --red-dark: #A61B1B;
+  /* ✅ Keep CTA red */
+  --red:#e53935;
 
-  --amber: #F2B34A;
+  --dark:#0f172a;
+  --muted:#6b7280;
+  --muted-2:#64748b;
+  --border:#e5e7eb;
+  --bg-light:#f6fbf9;
 
-  --text-dark: #0f172a;
-  --border: #e5e7eb;
+  --radius:16px;
+  --shadow-sm:0 10px 24px rgba(15,23,42,0.08);
+  --shadow-md:0 20px 40px rgba(15,23,42,0.10);
+  --shadow-lg:0 32px 72px rgba(15,23,42,0.12);
 
-  /* used in your HTML */
-  --muted: #64748b;
-  --link: #0b3d2e;
-  --link-hover: #1e7a5a;
+  --container:1280px;
+  --pad-x:24px;
+  --section-y:72px;
 
-  /* spacing system */
-  --section-y: 84px;
-  --section-y-tight: 64px;
-  --stack-1: 12px;
-  --stack-2: 18px;
-  --stack-3: 26px;
-  --stack-4: 40px;
+  /* ✅ Dark carousel gradients */
+  --ent-1:#06281F;
+  --ent-2:#0B3D2E;
+  --ent-3:#2DBA8A;
 
-  /* container widths */
-  --container: 1120px;
-  --gutter: 24px;
+  /* ✅ Clean neutrals */
+  --wash-1:#F6FBF9;
+  --wash-2:#FFFFFF;
+  --wash-3:#F3F6F8;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ height:100%; }
+  body{
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    color:var(--dark);
+    background:#fff;
+    line-height:1.6;
+  }
+  img,video{ max-width:100%; height:auto; display:block; }
+  a{ color:inherit; }
 
-body {
-  font-family: 'Inter', system-ui, sans-serif;
-  color: var(--text-dark);
-  background: #ffffff;
-  line-height: 1.6;
+  .container{
+    max-width:var(--container);
+    margin:0 auto;
+    padding:0 var(--pad-x);
+  }
+
+  /* ---------- HEADER ---------- */
+  header{ background:#fff; border-bottom:0 !important; }
+  .header-inner{
+    max-width:var(--container);
+    margin:0 auto;
+    padding:16px var(--pad-x);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    width:100%;
+  }
+  .logo{ display:flex; align-items:center; gap:12px; white-space:nowrap; }
+  .logo img{ height:38px; width:auto; }
+
+  nav{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+  nav a{
+    text-decoration:none;
+    color:var(--dark);
+    font-weight:500;
+    padding:8px 10px;
+    border-radius:10px;
+    transition:background .18s ease, color .18s ease;
+  }
+  nav a:hover{ background:#f1f5f9; color:#0b1220; }
+
+  @media (max-width: 820px){
+    :root{ --pad-x:18px; }
+    .header-inner{
+      padding:14px var(--pad-x);
+      flex-direction:column;
+      align-items:flex-start;
+    }
+    nav{ width:100%; justify-content:flex-start; gap:8px; }
+    nav a{ background:#f8fafc; border:1px solid rgba(15,23,42,0.06); }
+  }
+
+  /* =========================================================
+  HERO (kept red CTA)
+  ========================================================= */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:76px 0 54px;
+    text-align:center;
+
+    background:
+      radial-gradient(1200px 520px at 50% 18%,
+        rgba(255,255,255,0.92),
+        rgba(255,255,255,0.70) 48%,
+        rgba(255,255,255,0.00) 78%
+      ),
+      radial-gradient(circle at 18% 18%, rgba(37,99,235,0.12), transparent 62%),
+      radial-gradient(circle at 84% 14%, rgba(10,102,194,0.10), transparent 62%),
+      linear-gradient(180deg, var(--wash-1) 0%, var(--wash-2) 70%);
+  }
+
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+
+    background:
+      radial-gradient(circle at 1px 1px, rgba(15,23,42,0.030) 1px, transparent 3px)
+      0 0 / 16px 16px;
+
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      rgba(0,0,0,0.45) 0%,
+      rgba(0,0,0,0.18) 38%,
+      rgba(0,0,0,0.06) 58%,
+      rgba(0,0,0,0.00) 78%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      rgba(0,0,0,0.45) 0%,
+      rgba(0,0,0,0.18) 38%,
+      rgba(0,0,0,0.06) 58%,
+      rgba(0,0,0,0.00) 78%
+    );
+  }
+
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:-220px;
+    z-index:0;
+    pointer-events:none;
+
+    background:
+      radial-gradient(circle at 18% 18%, rgba(25,169,116,0.12), transparent 62%),
+      radial-gradient(circle at 84% 14%, rgba(11,61,46,0.10), transparent 62%);
+    filter: blur(12px);
+  }
+
+  .hero > .container{ position:relative; z-index:1; }
+
+  .hero-title-main{
+    color:#0b1220;
+    font-weight:700;
+    font-size:48px;
+    letter-spacing:-0.03em;
+  }
+  .hero-title-sub{
+    display:block;
+    margin-top:10px;
+    color: var(--blue);
+    font-weight:700;
+    font-size:48px;
+    letter-spacing:-0.03em;
+  }
+  .hero-buttons{
+    display:flex;
+    justify-content:center;
+    gap:24px;
+    flex-wrap:wrap;
+    margin-top:18px;
+  }
+  .hero-cta{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+  }
+  .btn{
+    min-width:200px;
+    padding:14px 28px;
+    font-size:16px;
+    font-weight:800;
+    border-radius:12px;
+    text-decoration:none;
+    transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    display:inline-block;
+    text-align:center;
+    border:2px solid transparent;
+    user-select:none;
+  }
+  .btn-primary{
+    background:var(--red);
+    color:#fff;
+    box-shadow:0 10px 24px rgba(229,57,53,0.30);
+  }
+  .btn-primary:hover{
+    transform:translateY(-1px);
+    box-shadow:0 16px 40px rgba(0,0,0,0.24);
+    filter:brightness(1.02);
+  }
+  .btn:focus-visible{
+    outline:3px solid rgba(255,255,255,0.35);
+    outline-offset:3px;
+  }
+  .cta-note{ font-size:14px; font-weight:600; color:#0f172a; opacity:0.9; }
+  .hero small{
+    display:block;
+    margin-top:20px;
+    color:#334155;
+    font-size:14px;
+    font-weight:600;
+    opacity:0.95;
+  }
+
+  @media (max-width: 820px){
+    .hero{ padding:52px 0 40px; }
+    .hero-title-main,.hero-title-sub{ font-size:38px; }
+  }
+  @media (max-width: 480px){
+    .hero-title-main,.hero-title-sub{ font-size:32px; }
+    .btn{ min-width: 240px; }
+  }
+
+  /* =========================================================
+  TRUST STRIP
+  ========================================================= */
+  .trust-logos-strip{
+  position:relative;
+  padding:42px 0 44px;
+
+  /* Blend with hero */
+  background:
+    radial-gradient(1100px 520px at 18% 0%, rgba(25,169,116,0.07), transparent 62%),
+    radial-gradient(1100px 520px at 82% 0%, rgba(11,61,46,0.05), transparent 62%),
+    linear-gradient(180deg,
+      var(--wash-2) 0%,
+      var(--wash-1) 45%,
+      var(--wash-3) 100%
+    );
 }
 
-a { color: inherit; }
-a.text-link {
-  color: var(--link);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-a.text-link:hover { color: var(--link-hover); }
-
-/* ---------- HEADER ---------- */
-header {
-  padding: 14px 56px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--border);
-  background: #ffffff;
+/* subtle texture */
+.trust-logos-strip::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(15,23,42,0.020) 1px, transparent 1.8px)
+    0 0 / 16px 16px;
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.20) 55%, rgba(0,0,0,0.28) 100%);
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.20) 55%, rgba(0,0,0,0.28) 100%);
 }
 
-.logo img { height: 26px; display: block; }
-
-nav a {
-  margin-left: 28px;
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-dark);
-  opacity: 0.85;
-  transition: opacity 0.2s ease;
+/* bridge fade into hero so there’s no seam */
+.trust-logos-strip::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; top:-42px;
+  height:42px;
+  pointer-events:none;
+  z-index:0;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, var(--wash-2) 100%);
 }
-nav a:hover { opacity: 1; }
 
-/* ---------- HERO ---------- */
-.hero {
+.trust-logos-strip .container{ position:relative; z-index:1; }
+.trust-head{ text-align:center; margin-bottom:18px; }
+.trust-kicker{
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:#334155;
+}
+
+/* ✅ Full-bleed marquee (edge-to-edge) */
+.trust-logos-marquee{
   position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   overflow: hidden;
-  background: linear-gradient(145deg, var(--green-900), var(--green-800), var(--green-700));
-  padding: 104px 24px 92px;
-  text-align: center;
+  margin-top: 10px;
+  padding: 0;
 }
 
-.hero::before,
-.hero::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  z-index: 0;
+/* ✅ Fade edges that MATCH section background (not pure white) */
+.trust-logos-marquee::before,
+.trust-logos-marquee::after{
+  content:"";
+  position:absolute;
+  top:0;
+  width:110px;
+  height:100%;
+  z-index:2;
+  pointer-events:none;
+}
+.trust-logos-marquee::before{
+  left:0;
+  background: linear-gradient(to right, var(--wash-2), transparent);
+}
+.trust-logos-marquee::after{
+  right:0;
+  background: linear-gradient(to left, var(--wash-2), transparent);
 }
 
-.hero::before {
-  top: -120px;
-  left: -120px;
-  width: 520px;
-  height: 520px;
-  background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+.trust-logos-track{
+  display:flex;
+  width:max-content;
+  align-items:center;
+  animation: trust-logo-scroll 22s linear infinite;
+  will-change: transform;
 }
-
-.hero::after {
-  bottom: -140px;
-  right: -140px;
-  width: 460px;
-  height: 460px;
-  background: radial-gradient(circle, rgba(255,255,255,0.04), transparent 70%);
-}
-
-.hero > * { position: relative; z-index: 1; }
-
-.hero h1 {
-  font-size: 48px;
-  line-height: 1.14;
-  letter-spacing: -0.035em;
-  max-width: 1200px;
-  margin: 0 auto 26px;
-  color: #ffffff;
-  font-weight: 700;
-}
-
-.hero h1 span {
-  display: block;
-  margin-top: 8px;
-  font-weight: 600;
-  color: var(--amber);
-}
-
-.hero p {
-  max-width: 720px;
-  margin: 0 auto 44px;
-  font-size: 18px;
-  color: rgba(255,255,255,0.72);
-}
-
-/* ---------- HERO CTA ---------- */
-.hero-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-
-.hero-cta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.btn {
-  min-width: 200px;
-  padding: 14px 32px;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 10px;
-  text-decoration: none;
-  display: inline-block;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  cursor: pointer;
-}
-
-.btn-primary {
-  background: var(--red);
-  color: #ffffff;
-  box-shadow: 0 8px 24px rgba(198,40,40,0.32);
-}
-
-.btn-primary:hover {
-  background: var(--red-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(198,40,40,0.45), 0 0 36px rgba(198,40,40,0.45);
-}
-
-.cta-note { font-size: 14px; color: rgba(255,255,255,0.7); }
-
-.hero small {
-  display: block;
-  margin-top: 28px;
-  font-size: 14px;
-  color: rgba(255,255,255,0.6);
-}
-
-/* ---------- GLOBAL PROOF (MAP BEHIND LOGOS + TRUST) ---------- */
-.global-proof {
-  position: relative;
-  background: #ffffff;
-  overflow: hidden;
-
-  /* space between hero and logos */
-  padding-top: 28px;
-
-  /* subtle section separation */
-  border-top: 1px solid rgba(15,23,42,0.06);
-}
-
-/* FIX: map getting “cut” — make it behave like a fixed-size illustration centered,
-   not stretched to container height */
-.global-proof::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-
-  background-image: url("images/worldmap.png");
-  background-repeat: no-repeat;
-  background-position: center 26px;
-  background-size: min(1180px, 92%) auto;
-
-  opacity: 0.27;
-}
-
-/* keep content above map */
-.global-proof > section {
-  position: relative;
-  z-index: 1;
-}
-
-/* tighten vertical rhythm between logo-strip and trust-section */
-.logo-strip {
-  padding: var(--section-y-tight) 0 28px;
-  overflow: hidden;
-}
-
-.logo-strip-title {
-  text-align: center;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #64748b;
-  margin-bottom: 28px;
-}
-
-.logo-marquee { position: relative; overflow: hidden; }
-
-.logo-marquee::before,
-.logo-marquee::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 120px;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.logo-marquee::before {
-  left: 0;
-  background: linear-gradient(to right, #ffffff, transparent);
-}
-
-.logo-marquee::after {
-  right: 0;
-  background: linear-gradient(to left, #ffffff, transparent);
-}
-
-.logo-track {
-  display: flex;
-  width: max-content;
-  align-items: center;
-  animation: scroll-logos 34s linear infinite;
-}
-
-.logo-set {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  padding-right: 12px;
-}
-
-.logo-tile {
-  width: 190px;
-  height: 86px;
-  margin: 0 14px;
-  background: rgba(255,255,255,0.92);
-  border: 1px solid rgba(15,23,42,0.08);
-  border-radius: 14px;
-  box-shadow: 0 10px 26px rgba(15,23,42,0.06);
-  display: grid;
-  place-items: center;
+.trust-logos-set{
+  display:flex;
+  align-items:center;
+  gap:22px;
   flex: 0 0 auto;
+  padding-right:22px;
 }
 
-.logo-tile img {
-  max-width: 140px;
-  max-height: 42px;
-  width: auto;
-  height: auto;
-  display: block;
-  opacity: 0.9;
-  filter: saturate(0.95);
+.logo-tile{
+  height:76px;
+  min-width:170px;              /* ✅ keep consistent */
+  padding:14px 18px;
+  border-radius:18px;
+  background: rgba(255,255,255,0.96);
+  border:1px solid rgba(15,23,42,0.06);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.logo-tile img{
+  max-height:34px;
+  max-width:100%;
+  object-fit:contain;
+  opacity:0.95;
+  filter: saturate(0.98);
 }
 
-@keyframes scroll-logos {
+@keyframes trust-logo-scroll{
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .logo-track { animation: none; }
+@media (max-width: 1024px){
+  .trust-logos-track{ animation-duration: 18s; }
+  .logo-tile{ min-width:170px; } /* ✅ fix: was 640px */
 }
-
-/* ---------- TRUST SECTION ---------- */
-.trust-section {
-  padding: 20px 24px var(--section-y-tight);
-}
-
-.trust-container {
-  max-width: var(--container);
-  margin: 0 auto;
-}
-
-.trust-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 48px;
-  margin-bottom: 52px;
-  text-align: center;
-}
-
-.stat h3 {
-  font-size: 42px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  background: linear-gradient(180deg, #0B3D2E, #216651, #3AAE84);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: transform 0.25s ease, text-shadow 0.25s ease;
-}
-
-.stat:hover h3 {
-  transform: scale(1.08);
-  text-shadow: 0 0 12px rgba(30,122,90,0.35), 0 0 28px rgba(30,122,90,0.25);
-}
-
-.stat p {
-  font-size: 15px;
-  color: #475569;
-}
-
-.testimonials {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 48px;
-}
-
-.testimonial {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 32px 34px;
-  box-shadow: 0 12px 32px rgba(15,23,42,0.06);
-  border: 1px solid rgba(15,23,42,0.06);
-}
-
-.testimonial p {
-  font-size: 17px;
-  margin-bottom: 16px;
-  color: #0f172a;
-}
-
-.testimonial span {
-  font-size: 14px;
-  font-weight: 600;
-  color: #64748b;
-}
-
-@media (max-width: 900px) {
-  .trust-stats { grid-template-columns: repeat(2, 1fr); }
-  .testimonials { grid-template-columns: 1fr; }
-}
-
-/* ================= FEATURES ================= */
-.features {
-  padding: var(--section-y) 24px;
-  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-}
-
-.features-container {
-  max-width: var(--container);
-  margin: 0 auto;
-}
-
-.features-intro {
-  max-width: var(--container);
-  margin: 0 auto 52px;
-  padding: 0 24px;
-  text-align: center;
-}
-
-.features-intro h2 {
-  font-size: 28px;
-  line-height: 1.3;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: #0f172a;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-}
-
-.feature-card {
-  position: relative;
-  height: 150px;
-  border-radius: 18px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
-  overflow: hidden;
-  text-decoration: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.feature-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #0b3d2e, #1e7a5a);
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-
-.feature-front,
-.feature-back {
-  position: absolute;
-  inset: 0;
-  padding: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-.feature-front h3 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #0b3d2e;
-}
-
-.feature-back {
-  opacity: 0;
-  transform: translateY(12px);
-  color: #ffffff;
-}
-
-.feature-back p {
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.feature-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 26px 60px rgba(15, 23, 42, 0.16);
-}
-
-.feature-card:hover::before { opacity: 1; }
-.feature-card:hover .feature-front { opacity: 0; transform: translateY(-8px); }
-.feature-card:hover .feature-back { opacity: 1; transform: translateY(0); }
-
-.feature-card.secondary { opacity: 0.9; }
-
-@media (max-width: 900px) {
-  .features-grid { grid-template-columns: 1fr; }
-  .feature-card { height: auto; min-height: 200px; }
-}
-
-.stat-highlight {
-  font-weight: 700;
-  font-size: 1em;
-  padding: 0 6px;
-  background: linear-gradient(135deg, #0b3d2e, #1e7a5a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  white-space: nowrap;
-}
-
-/* ================= CAROUSEL ================= */
-.carousel {
-  background:
-    radial-gradient(900px 500px at 50% 0%, rgba(30,122,90,0.25), transparent 60%),
-    linear-gradient(180deg, #eaf3ef 0%, #f8fbf9 50%, #ffffff 100%);
-  padding: var(--section-y) 0;
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
-}
-
-.carousel-shell {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-  position: relative;
-}
-
-.carousel-viewport {
-  max-width: 1100px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.carousel-track {
-  width: 100%;
-  position: relative;
-  min-height: 520px;
-}
-
-.carousel-item {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.carousel-item.active {
-  display: flex;
-  animation: fadeUp 260ms ease both;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.carousel-caption {
-  max-width: 860px;
-  margin-bottom: 18px;
-}
-
-.carousel-caption strong {
-  font-size: 30px;
-  font-weight: 750;
-  letter-spacing: -0.03em;
-  color: #0b3d2e;
-}
-
-.carousel-caption p {
-  margin-top: 10px;
-  font-size: 16px;
-  color: #475569;
-}
-
-.carousel-media {
-  width: fit-content;        
-  max-width: 100%;
-  margin: 0 auto 28px;
-  border-radius: 16px;
-  overflow: hidden;
-  background: transparent;   
-  border: none;              
-  box-shadow: none;          
-}
-
-
-.carousel-media img,
-.carousel-media video {
-  display: block;
-  max-width: 820px;   /* 🔥 controls size */
-  width: 100%;
-  height: auto;
-  border-radius: 14px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.08);            
-}
-
-.carousel-btn {
-  position: absolute;
-  top: 52%;
-  transform: translateY(-50%);
-  background: #ffffff;
-  border: 1px solid rgba(11,61,46,0.12);
-  width: 48px;
-  height: 48px;
-  border-radius: 999px;
-  font-size: 22px;
-  color: #0b3d2e;
-  cursor: pointer;
-  box-shadow: 0 20px 44px rgba(11,61,46,0.16);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  z-index: 5;
-}
-
-.carousel-btn.prev { left: 8px; }
-.carousel-btn.next { right: 8px; }
-
-.carousel-btn:hover {
-  transform: translateY(-50%) scale(1.10);
-  box-shadow: 0 28px 64px rgba(11,61,46,0.22);
-}
-
-.carousel-btn:focus {
-  outline: 3px solid rgba(30,122,90,0.26);
-  outline-offset: 3px;
-}
-
-.carousel-nav {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.carousel-dot {
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(30,122,90,0.28);
-  color: #0f172a;
-
-  font-size: 13px;
-  font-weight: 650;
-  letter-spacing: -0.01em;
-
-  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-  cursor: pointer;
-}
-
-.carousel-dot:hover {
-  transform: translateY(-1px);
-  background: rgba(255,255,255,0.98);
-  border-color: rgba(30,122,90,0.52);
-  box-shadow: 0 14px 30px rgba(15,23,42,0.08);
-}
-
-.carousel-dot.active {
-  background: linear-gradient(135deg, #0b3d2e, #1e7a5a);
-  border-color: #1e7a5a;
-  color: #ffffff;
-  box-shadow: 0 16px 40px rgba(30,122,90,0.22);
-}
-
-.carousel-dot .pill {
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  background: rgba(100,116,139,0.55);
-  display: inline-block;
-  margin-right: 8px;
-  vertical-align: middle;
-}
-.carousel-dot.active .pill { background: rgba(255,255,255,0.92); }
-
-@media (max-width: 900px) {
-  .carousel-btn { display: none; }
-  .carousel-track { min-height: 390px; }
-  .carousel-media { height: 300px; }
-}
-
-/* ================= OUTCOMES ================= */
-.outcomes {
-  position: relative;
-  padding: var(--section-y-tight) 0;
-  overflow: hidden;
-  border-top: 1px solid rgba(15, 23, 42, 0.06);
-  padding-bottom: 0px;
-
-
-  background:
-    radial-gradient(1000px 420px at 18% 10%, rgba(34,197,94,0.10), transparent 60%),
-    radial-gradient(920px 360px at 82% 20%, rgba(11,61,46,0.10), transparent 62%),
-    linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-}
-
-.outcomes::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.8), transparent 40%),
-    radial-gradient(circle at 70% 50%, rgba(255,255,255,0.6), transparent 45%);
-  pointer-events: none;
-}
-
-.outcomes-container {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-  position: relative;
-  z-index: 1;
-}
-
-.outcomes-head {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.outcomes-title {
-  margin-top: 0;
-  font-size: 40px;
-  line-height: 1.15;
-  font-weight: 750;
-  letter-spacing: -0.04em;
-  color: #0f172a;
-}
-
-.outcomes-sub {
-  margin-top: 12px;
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 16.5px;
-  color: #475569;
-}
-
-.outcomes-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 22px;
-  margin-top: 28px;
-}
-
-@media (max-width: 900px) {
-  .outcomes-title { font-size: 32px; }
-  .outcomes-grid { grid-template-columns: 1fr; }
-}
-
-.outcome-card {
-  position: relative;
-  padding: 22px 22px 24px;
-  border-radius: 18px;
-
-  background: rgba(255,255,255,0.80);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(15,23,42,0.08);
-  box-shadow: 0 16px 44px rgba(15,23,42,0.08);
-
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-
-  min-height: 192px;
-  display: flex;
-  flex-direction: column;
-}
-
-.outcome-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(30,122,90,0.22);
-  box-shadow:
-    0 26px 64px rgba(15,23,42,0.14),
-    0 0 0 1px rgba(30,122,90,0.12);
-}
-
-.outcome-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  display: grid;
-  place-items: center;
-
-  background: linear-gradient(135deg, rgba(11,61,46,0.92), rgba(30,122,90,0.92));
-  box-shadow: 0 14px 28px rgba(30,122,90,0.22);
-  margin-bottom: 14px;
-  flex: 0 0 auto;
-}
-
-.outcome-icon svg {
-  width: 22px;
-  height: 22px;
-  stroke: #ffffff;
-  stroke-width: 2;
-  fill: none;
-}
-
-.outcome-card h3 {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #0f172a;
-  margin-bottom: 10px;
-  min-height: 26px;
-}
-
-.outcome-card p {
-  font-size: 15.5px;
-  line-height: 1.65;
-  color: #475569;
-  margin: 0;
-  min-height: 52px;
-}
-
-.outcome-card::after {
-  content: "";
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: 14px;
-  height: 3px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(11,61,46,0.0), rgba(34,197,94,0.55), rgba(11,61,46,0.0));
-  transform: scaleX(0.6);
-  opacity: 0.0;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-.outcome-card:hover::after {
-  opacity: 1;
-  transform: scaleX(1);
-}
-
-/* outcomes CTA row */
-.outcomes-cta{
-  margin-top: 28px;
-  margin-bottom: 28px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-
-  padding: 18px 20px;
-  border-radius: 18px;
-
-  background: rgba(255,255,255,0.82);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(15,23,42,0.08);
-  box-shadow: 0 16px 44px rgba(15,23,42,0.08);
-
-  width: 100%;
-}
-
-.outcomes-cta p{
-  margin: 0;
-  font-size: 15px;
-  color: #475569;
-}
-
-.outcomes-link{
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  font-weight: 750;
-  color: #0b3d2e;
-  text-decoration: none;
-
-  padding: 10px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(11,61,46,0.18);
-  background: rgba(255,255,255,0.9);
-  box-shadow: 0 10px 22px rgba(15,23,42,0.06);
-
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-.outcomes-link:hover{
-  transform: translateY(-2px);
-  border-color: rgba(30,122,90,0.35);
-  box-shadow: 0 16px 30px rgba(15,23,42,0.10);
-}
-
-@media (max-width: 720px) {
-  .outcomes-cta { flex-direction: column; text-align: center; }
-}
-
-/* ---------- EVALUATE SECTION (MATCHES REST) ---------- */
-.eval-soft{
-  position: relative;
-  padding: var(--section-y) 0;
-  overflow: hidden;
-  border-top: 1px solid rgba(15,23,42,0.06);
-
-  background:
-    radial-gradient(1000px 420px at 18% 10%, rgba(34,197,94,0.10), transparent 60%),
-    radial-gradient(920px 360px at 82% 20%, rgba(11,61,46,0.10), transparent 62%),
-    linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-}
-
-.eval-soft::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.8), transparent 40%),
-    radial-gradient(circle at 70% 50%, rgba(255,255,255,0.6), transparent 45%);
-  pointer-events:none;
-}
-
-.eval-wrap{
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-  position: relative;
-  z-index: 1;
-  text-align: center;
-}
-
-.eval-soft h2{
-  font-size: 40px;
-  line-height: 1.15;
-  font-weight: 750;
-  letter-spacing: -0.04em;
-  color: #0f172a;
-  margin-bottom: 12px;
-}
-
-.eval-lead{
-  font-size: 16.5px;
-  color: #475569;
-  margin: 12px auto 40px;
-  max-width: 760px;
-}
-
-.eval-layout{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 22px;
-  align-items: stretch;
-}
-
-.eval-panel{
-  position: relative;
-  padding: 34px 34px 30px;
-  border-radius: 18px;
-
-  background: rgba(255,255,255,0.82);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(15,23,42,0.08);
-  box-shadow: 0 16px 44px rgba(15,23,42,0.08);
-
-  text-align: left;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.eval-panel:hover{
-  transform: translateY(-6px);
-  border-color: rgba(30,122,90,0.22);
-  box-shadow:
-    0 26px 64px rgba(15,23,42,0.14),
-    0 0 0 1px rgba(30,122,90,0.12);
-}
-
-.eval-panel.primary{
-  border-color: rgba(30,122,90,0.18);
-}
-
-.eval-panel.primary::after{
-  content:"";
-  position:absolute;
-  left: 18px;
-  right: 18px;
-  bottom: 14px;
-  height: 3px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(11,61,46,0.0), rgba(34,197,94,0.55), rgba(11,61,46,0.0));
-  transform: scaleX(0.8);
-  opacity: 0.75;
-}
-
-.eval-panel h3{
-  font-size: 18px;
-  font-weight: 750;
-  letter-spacing: -0.02em;
-  margin-bottom: 10px;
-}
-
-.eval-price{
-  display: block;
-  font-size: 42px;
-  font-weight: 850;
-  letter-spacing: -0.03em;
-  color: #0f172a;
-}
-
-.eval-price small{
-  font-size: 14px;
-  font-weight: 650;
-  color: #64748b;
-  margin-left: 6px;
-}
-
-.eval-meta{
-  margin: 10px 0 22px;
-  color: #475569;
-  font-size: 14.5px;
-}
-
-.eval-cta{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  padding: 12px 16px;
-  border-radius: 999px;
-  font-weight: 750;
-  text-decoration: none;
-
-  border: 1px solid rgba(15,23,42,0.10);
-  background: rgba(255,255,255,0.92);
-
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.eval-cta:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 16px 30px rgba(15,23,42,0.10);
-}
-
-.eval-cta.subtle{
-  color: #0b3d2e;
-  border-color: rgba(11,61,46,0.18);
-}
-
-.eval-cta.strong{
-  background: linear-gradient(135deg, #0b3d2e, #1e7a5a);
-  color: #ffffff;
-  border-color: rgba(30,122,90,0.35);
-  box-shadow: 0 16px 40px rgba(30,122,90,0.22);
-}
-
-.eval-cta.strong:hover{
-  box-shadow: 0 22px 54px rgba(30,122,90,0.28);
-}
-
-.eval-soft .eval-footnote{
-  margin-top: 18px;
-  font-size: 12px;
-  color: #64748b;
-}
-
-@media (max-width: 900px){
-  .eval-layout{ grid-template-columns: 1fr; }
-  .eval-soft h2{ font-size: 32px; }
-}
-
-/* ---------- FAQ SECTION (MATCHES REST) ---------- */
-.faq-section{
-  position: relative;
-  padding: var(--section-y) 0;
-  overflow: hidden;
-  border-top: 1px solid rgba(15,23,42,0.06);
-
-  background:
-    radial-gradient(900px 420px at 20% 10%, rgba(30,122,90,0.10), transparent 60%),
-    radial-gradient(820px 360px at 82% 20%, rgba(11,61,46,0.08), transparent 62%),
-    linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-  text-align: center;
-}
-
-.faq-section .container{
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-  position: relative;
-  z-index: 1;
-}
-
-.faq-section h2{
-  font-size: 36px;
-  font-weight: 750;
-  letter-spacing: -0.04em;
-  margin-bottom: 10px;
-  color: #0f172a;
-}
-
-.faq-subtext{
-  font-size: 16px;
-  color: #475569;
-  margin: 0 auto 36px;
-  max-width: 760px;
-}
-
-.faq-carousel{
-  max-width: 860px;
-  margin: 0 auto;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-}
-
-.faq-track{
-  width: 100%;
-  min-height: 220px;
-  position: relative;
-}
-
-.faq-item{
-  background: rgba(255,255,255,0.82);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(15,23,42,0.08);
-  border-radius: 18px;
-  padding: 34px 34px;
-  text-align: left;
-  box-shadow: 0 16px 44px rgba(15,23,42,0.08);
-
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  transform: translateY(6px);
-  display: none;
-}
-
-.faq-item.active{
-  display: block;
-  transform: translateY(0);
-}
-
-.faq-item h3{
-  font-size: 18px;
-  font-weight: 750;
-  letter-spacing: -0.02em;
-  margin-bottom: 12px;
-  color: #0f172a;
-}
-
-.faq-item p{
-  font-size: 15.5px;
-  line-height: 1.65;
-  color: #475569;
-}
-
-.faq-item a{
-  color: #0b3d2e;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.faq-item a:hover{ color: #1e7a5a; }
-
-.faq-nav{
-  border: 1px solid rgba(11,61,46,0.16);
-  background: rgba(255,255,255,0.92);
-  width: 46px;
-  height: 46px;
-  border-radius: 999px;
-  color: #0b3d2e;
-  cursor: pointer;
-  box-shadow: 0 20px 44px rgba(11,61,46,0.16);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.faq-nav:hover{
-  transform: scale(1.08);
-  box-shadow: 0 28px 64px rgba(11,61,46,0.22);
-}
-
 @media (max-width: 640px){
-  .faq-section h2{ font-size: 28px; }
-  .faq-item{ padding: 28px; }
-  .faq-nav{ display: none; }
-}
-
-/* ---------- FOOTER ---------- */
-footer {
-  padding: 36px 24px;
-  text-align: center;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
-  font-size: 14px;
-  background: #ffffff;
-}
-
-/* map sizing on smaller screens so it never feels cropped */
-@media (max-width: 900px){
-  .global-proof::before{
-    background-position: center 18px;
-    background-size: 92% auto;
-  }
-}
-.testimonials-section{
-  padding: var(--section-y-tight) 0;
-  text-align: center;
-  border-top: 1px solid rgba(15,23,42,0.06);
-  background: #ffffff;
-}
-
-.testimonials-section h2{
-  font-size: 36px;
-  font-weight: 750;
-  letter-spacing: -0.04em;
-  margin-bottom: 0px;
-}
-
-.testimonials-sub{
-  font-size: 16px;
-  color: #475569;
-  max-width: 720px;
-  margin: 0 auto 48px;
-}
-
-.testimonials-grid{
-  max-width: 920px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
-}
-
-@media (max-width: 900px){
-  .testimonials-grid{
-    grid-template-columns: 1fr;
-  }
-}
-
-
-
+  .trust-logos-track{ animation-duration: 15s; }
+  .trust-logos-set{ gap:14px; padding-right:14px; }
+  .trust-logos-strip{ padding:34px 0 44px; }
+  .logo-tile{
+    height:70px;
+    min-width:148px;
+    border-radius:16px;
     
+  }
+}
+
+  /* ======================================================================
+  CAROUSEL (dark bg + visible pills)
+  ====================================================================== */
+  .carousel{
+    position:relative;
+    padding:72px 0 84px;
+    overflow:hidden;
+    background:
+      radial-gradient(900px 520px at 22% 18%, rgba(25,169,116,0.22), transparent 62%),
+      radial-gradient(900px 560px at 78% 12%, rgba(11,61,46,0.28), transparent 60%),
+      linear-gradient(180deg, #061a33 0%, #0b1220 70%, #081a2e 100%);
+  }
+  .carousel::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 1.8px) 0 0 / 18px 18px;
+    opacity:0.35;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0) 100%);
+  }
+
+  .carousel-shell{
+    max-width:var(--container);
+    margin:0 auto;
+    padding:0 var(--pad-x);
+    position:relative;
+    z-index:1;
+  }
+  .carousel-viewport{
+    max-width:1240px;
+    margin:0 auto;
+    position:relative;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  .carousel-track{
+    width:100%;
+    position:relative;
+    min-height:540px;
+    padding-top:6px;
+  }
+  .carousel-item{ display:none; flex-direction:column; align-items:center; }
+  .carousel-item.active{ display:flex; animation:fadeUp 280ms ease both; }
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform: translateY(10px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  .carousel-caption{
+    width:100%;
+    max-width:980px;
+    margin:0 auto 18px;
+    padding:0 6px;
+    text-align:left;
+  }
+  .carousel-caption strong{
+    font-size:38px;
+    font-weight:900;
+    letter-spacing:-0.035em;
+    color:rgba(236,253,245,0.95);
+  }
+  .carousel-caption p{
+    margin-top:10px;
+    font-size:16px;
+    color:rgba(226,232,240,0.78);
+    line-height:1.7;
+  }
+
+  .carousel-item video{
+    width: 100%;
+    max-width: 720px;
+    object-fit: cover;
+    border-radius: 18px;
+    display: block;
+    background: transparent;
+    box-shadow: 0 18px 38px rgba(0,0,0,0.40);
+    margin: 0 auto;
+  }
+
+  .carousel-btn{
+    position:absolute;
+    top:28px;
+    width:46px;
+    height:46px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,0.16);
+    background: rgba(255,255,255,0.08);
+    color: rgba(226,232,240,0.95);
+    cursor:pointer;
+    box-shadow:0 16spx 36px rgba(0,0,0,0.30);
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    z-index:10;
+  }
+  .carousel-btn.prev{ right: calc(var(--pad-x) + 66px); }
+  .carousel-btn.next{ right: var(--pad-x); }
+  .carousel-btn:hover{
+    transform: translateY(-1px);
+    border-color: rgba(43,140,255,0.45);
+    background: rgba(43,140,255,0.14);
+    box-shadow:0 22px 50px rgba(0,0,0,0.36);
+  }
+
+  .carousel-nav{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin:22px 0 0;
+    padding:0 10px;
+  }
+  .carousel-dot{
+    padding:10px 18px;
+    border-radius:999px;
+    background: rgba(255,255,255,0.18);
+    border:1px solid rgba(255,255,255,0.32);
+    color: rgba(226,232,240,0.95);
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:-0.01em;
+    cursor:pointer;
+    box-shadow:
+      0 10px 26px rgba(0,0,0,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    transition: transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease;
+  }
+  .carousel-dot:hover{
+    transform:translateY(-1px);
+    background: rgba(255,255,255,0.26);
+    border-color: rgba(43,140,255,0.55);
+    box-shadow:
+      0 16px 38px rgba(0,0,0,0.42),
+      inset 0 1px 0 rgba(255,255,255,0.35);
+  }
+  .carousel-dot.active{
+    background: linear-gradient(135deg, var(--ent-2), var(--ent-3));
+    border-color: rgba(43,140,255,0.55);
+    color:#fff;
+    box-shadow:0 18px 44px rgba(43,140,255,0.22);
+  }
+  .carousel-dot .pill{
+    width:9px;
+    height:9px;
+    border-radius:999px;
+    background: rgba(226,232,240,0.90);
+    display:inline-block;
+    margin-right:8px;
+    vertical-align:middle;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.25);
+  }
+  .carousel-dot.active .pill{
+    background: rgba(255,255,255,0.98);
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.20);
+  }
+
+  @media (max-width: 900px){
+    .carousel-btn{ display:none; }
+    .carousel-item video{ height:320px; }
+    .carousel-track{ min-height:420px; }
+    .carousel-caption strong{ font-size:30px; }
+  }
+
+  /* ---------- FEATURES ---------- */
+  .features{
+    padding:var(--section-y) 0;
+    background:var(--bg-light);
+    text-align:center;
+  }
+  .feature-heading{
+    font-size:32px;
+    line-height:1.35;
+    max-width:1040px;
+    margin:0 auto 44px;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    color:#0b1220;
+    padding:0 var(--pad-x);
+  }
+  .feature-heading .highlight{ color:var(--blue); font-weight:900; }
+
+  .feature-grid{
+    max-width:var(--container);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
+    gap:24px;
+    padding:0 var(--pad-x);
+  }
+  .card{
+    background:#fff;
+    padding:26px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-md);
+    text-align:left;
+    transition:box-shadow .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
+    border:2px solid transparent;
+  }
+  .card:hover{
+    background-color:rgba(246,251,249,0.95);
+    box-shadow:0 28px 60px rgba(25,169,116,0.18);
+    border-color:var(--blue-2);
+    transform:translateY(-2px);
+  }
+  .card h3{
+    margin-bottom:12px;
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:-0.01em;
+  }
+  .card p{ margin-bottom:18px; color:var(--muted); font-size:16px; }
+  .feature-list{ list-style:none; }
+  .feature-list li{ margin-bottom:16px; position:relative; padding-left:24px; }
+  .feature-list li::before{
+    content:"✓";
+    position:absolute;
+    left:0;
+    top:0;
+    color:var(--blue-2);
+    font-weight:900;
+  }
+  .feature-list strong{ display:block; font-weight:800; color:var(--dark); }
+  .feature-list span{
+    display:block;
+    margin-top:6px;
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    font-size:14px;
+    color:var(--muted);
+    transition:max-height .35s ease, opacity .25s ease;
+  }
+  .card:hover .feature-list span{ max-height:120px; opacity:1; }
+  .feature-list a{ text-decoration:none; }
+  .feature-list a:hover{ color:var(--blue-2); text-decoration:underline; }
+
+  /* ---------- WORKFLOW (same format) ---------- */
+  .flow-as-flip{
+    padding: var(--section-y) 24px;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    text-align: center;
+  }
+  .flow-as-flip .features-container{ max-width: var(--container); margin: 0 auto; }
+  .flow-as-flip .features-intro{ max-width: 980px; margin: 0 auto 36px; padding: 0 24px; }
+  .flow-as-flip .features-intro h2{
+    font-size: 30px;
+    line-height: 1.3;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #0f172a;
+  }
+  .flow-as-flip .features-intro p{
+    max-width: 780px;
+    margin: 10px auto 0;
+    font-size: 16px;
+    color: var(--muted);
+  }
+  @media (min-width: 900px){
+    .flow-as-flip .features-grid{
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 220px);
+      justify-content: center;
+      gap: 28px;
+      padding: 12px 0 0;
+    }
+  }
+  @media (max-width: 899px){
+    .flow-as-flip .features-grid{
+      position: relative;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 220px;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 6px 6px 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      justify-content: start;
+    }
+  }
+  .flow-as-flip .features-grid::before{
+    content:"";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 50%;
+    height: 1px;
+    transform: translateY(-50%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(25,169,116,0.18),
+      rgba(11,61,46,0.35),
+      transparent
+    );
+    opacity: 0.6;
+    pointer-events:none;
+  }
+  .flow-as-flip .feature-card{
+    display: block;
+    width: 220px;
+    height: 160px;
+    scroll-snap-align: start;
+    position: relative;
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .flow-as-flip .feature-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(800px 260px at 20% 18%, rgba(255,255,255,0.20), transparent 60%),
+      linear-gradient(135deg, var(--ent-1) 0%, var(--ent-2) 55%, var(--ent-3) 100%);
+    opacity:0;
+    transition:opacity 0.25s ease;
+  }
+  .flow-as-flip .feature-front,
+  .flow-as-flip .feature-back{
+    position:absolute;
+    inset:0;
+    padding: 22px 18px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    transition:opacity 0.25s ease, transform 0.25s ease;
+  }
+  .flow-as-flip .feature-front h3{
+    margin: 0;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--blue-2);
+  }
+  .flow-as-flip .feature-back{
+    opacity: 0;
+    transform: translateY(16px);
+    color: #eef6ff;
+  }
+  .flow-as-flip .feature-back p{
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    max-width: 28ch;
+  }
+  .flow-as-flip .feature-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 26px 60px rgba(15, 23, 42, 0.16);
+  }
+  .flow-as-flip .feature-card:hover::before{ opacity: 1; }
+  .flow-as-flip .feature-card:hover .feature-front{ opacity: 0; transform: translateY(-6px); }
+  .flow-as-flip .feature-card:hover .feature-back{ opacity: 1; transform: translateY(0); }
+  .flow-as-flip .feature-card:hover .feature-front h3{ color: #eef6ff; }
+
+  .outcomes-cta{
+    margin: 28px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border-radius: 18px;
+    background: #eef6ff;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(10,102,194,0.16);
+    box-shadow: 0 16px 44px rgba(15,23,42,0.08);
+    max-width: 950px;
+  }
+  .outcomes-cta p{ margin: 0; font-size: 15px; color: #475569; max-width: 540px; }
+  .outcomes-link{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    color: var(--blue-2);
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(10,102,194,0.25);
+    background: rgba(10,102,194,0.08);
+    box-shadow: 0 10px 22px rgba(15,23,42,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+  .outcomes-link:hover{
+    transform: translateY(-2px);
+    border-color: rgba(10,102,194,0.45);
+    background: rgba(10,102,194,0.15);
+    box-shadow: 0 16px 30px rgba(15,23,42,0.10);
+  }
+  @media (max-width: 720px) {
+    .outcomes-cta { flex-direction: column; text-align: center; }
+    .outcomes-link{ width:100%; justify-content:center; }
+  }
+
+  /* ---------- METRICS BAND ---------- */
+  .trust-metrics-band{
+    padding: 62px 0;
+    background: linear-gradient(180deg,#ffffff 0%, #f8fafc 55%, #ffffff 100%);
+    text-align:center;
+  }
+  .trust-metrics{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    text-align:center;
+  }
+  .metric { padding: 16px 12px; }
+  .metric strong{
+    display:inline-block;
+    font-weight:900;
+    font-size:clamp(34px, 3.2vw, 44px);
+    letter-spacing:-0.05em;
+    background:linear-gradient(180deg, #0b1220, var(--blue-2));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    transition:transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+               text-shadow 0.32s ease;
+  }
+  .metric span{ display:block; margin-top:10px; font-size:14px; color:#64748b; }
+  .metric:hover strong{ transform:scale(1.18); text-shadow:0 18px 36px rgba(37,99,235,0.22); }
+  @media (max-width: 1024px){
+    .trust-metrics{ grid-template-columns:repeat(2,1fr); }
+  }
+  @media (max-width: 640px){
+    .trust-metrics{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- PRICING (same interaction) ---------- */
+  .pricing-compare{
+    padding: calc(var(--section-y) - 12px) 0;
+    background:
+      radial-gradient(900px 380px at 25% 0%, rgba(25,169,116,0.10), transparent 60%),
+      linear-gradient(180deg,#f6fbf9 0%, #ffffff 65%);
+  }
+  .pricing-wrap{
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+    text-align: center;
+  }
+  .pricing-title{
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #0b1220;
+    margin-bottom: 10px;
+  }
+  .pricing-sub{
+    max-width: 860px;
+    margin: 0 auto 34px;
+    font-size: 16px;
+    color: var(--muted-2);
+    line-height: 1.7;
+  }
+  .pricing-grid{
+    display: grid;
+    grid-template-columns: 2fr 1.15fr;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .compare-card{
+    background: rgba(255,255,255,0.92);
+    border: 1px solid rgba(15,23,42,0.08);
+    border-radius: 22px;
+    box-shadow: 0 18px 48px rgba(15,23,42,0.10);
+    overflow: hidden;
+    position: relative;
+  }
+  .compare-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(900px 360px at 30% 15%, rgba(37,99,235,0.10), transparent 60%),
+      radial-gradient(900px 360px at 70% 10%, rgba(10,102,194,0.08), transparent 65%);
+    pointer-events:none;
+  }
+
+  .compare-card.pill-mode{ padding: 18px 18px 16px; }
+
+  .plan-pills{
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    margin: 8px auto 16px;
+  }
+  .pills-shell{
+    display: inline-flex;
+    gap: 8px;
+    padding: 6px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(15,23,42,0.08);
+    box-shadow: 0 10px 26px rgba(15,23,42,0.08);
+    backdrop-filter: blur(10px);
+  }
+  .pill-btn{
+    appearance: none;
+    border: 1px solid transparent;
+    background: transparent;
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    color: #0f172a;
+    cursor: pointer;
+    transition: background .18s ease, color .18s ease, box-shadow .18s ease, border-color .18s ease, transform .18s ease;
+  }
+  .pill-btn:hover{
+    transform: translateY(-1px);
+    border-color: rgba(10,102,194,0.25);
+    background: rgba(10,102,194,0.06);
+  }
+  .pill-btn[aria-selected="true"]{
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--ent-1), var(--ent-2), var(--ent-3));
+    box-shadow: 0 16px 40px rgba(37,99,235,0.20);
+    border-color: rgba(255,255,255,0.16);
+  }
+
+  .plan-panel{ position: relative; z-index: 2; padding: 10px 10px 6px; }
+  .plan-panel .plan-col{
+    padding: 20px 22px 20px;
+    background: rgba(255,255,255,0.88);
+    border: 1px solid rgba(15,23,42,0.08);
+    border-radius: 18px;
+    box-shadow: 0 16px 38px rgba(15,23,42,0.08);
+    text-align:left;
+  }
+  .plan-meta{ display:flex; align-items:flex-start; justify-content:space-between; gap: 12px; }
+  .plan-col h3{ font-size: 22px; font-weight: 900; letter-spacing: -0.01em; margin: 0 0 6px; color: #0b1220; }
+  .plan-detail{ margin-top: 8px; font-size: 13px; color: var(--muted-2); }
+  .plan-badge{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding: 6px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 900;
+    color: #0f172a;
+    background: rgba(10,102,194,0.08);
+    border: 1px solid rgba(10,102,194,0.18);
+    white-space: nowrap;
+  }
+  .plan-price{
+    margin-top: 14px; padding: 14px 14px;
+    border-radius: 16px;
+    background: rgba(10,102,194,0.06);
+    border: 1px solid rgba(10,102,194,0.16);
+  }
+  .plan-kicker{
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(15,23,42,0.72);
+  }
+  .plan-amount-row{
+    margin-top: 8px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .plan-amount-row .amt{
+    font-size: 34px;
+    font-weight: 1000;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--ent-1), var(--ent-2), var(--ent-3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .plan-amount-row .unit{ font-size: 14px; font-weight: 700; color: var(--muted-2); }
+  .plan-divider{ height: 1px; background: rgba(10,102,194,0.20); margin: 14px 0 16px; }
+
+  .plan-list{
+    margin: 0; padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+  .plan-list li{
+    position: relative;
+    padding-left: 22px;
+    color: #0f172a;
+    font-size: 14.5px;
+  }
+  .plan-list li::before{
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 900;
+    color: var(--blue-2);
+  }
+  .plan-cta-row{ margin-top: 18px; display:flex; justify-content:flex-start; gap: 12px; flex-wrap: wrap; }
+  .plan-btn{
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-weight: 900;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    min-width: 180px;
+  }
+  .plan-btn.outline{
+    background: rgba(255,255,255,0.9);
+    color: #0b1220;
+    border-color: rgba(10,102,194,0.25);
+    box-shadow: 0 12px 26px rgba(15,23,42,0.08);
+  }
+  .plan-btn.solid{
+    background: linear-gradient(135deg, var(--ent-1), var(--ent-2), var(--ent-3));
+    color: #fff;
+    box-shadow: 0 16px 40px rgba(37,99,235,0.18);
+  }
+
+  .pricing-footnote{
+    margin-top: 14px;
+    font-size: 11.5px;
+    line-height: 1.45;
+    color: rgba(15,23,42,0.55);
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .pricing-footnote a{
+    color: rgba(11,61,46,0.90);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(11,61,46,0.35);
+  }
+  .pricing-footnote a:hover{ border-bottom-color: rgba(11,61,46,0.65); }
+
+  .pitch-card{
+    background: linear-gradient(180deg, #eef8f2 0%, #e1f1e8 100%);
+    border: 1px solid #9ec9b4;
+    border-radius: 22px;
+    box-shadow: 0 22px 56px rgba(11,61,46,0.14);
+    padding: 28px 26px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pitch-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(900px 380px at 20% 10%, rgba(45,186,138,0.20), transparent 60%),
+      radial-gradient(900px 380px at 80% 30%, rgba(11,61,46,0.12), transparent 65%);
+    pointer-events:none;
+  }
+  .pitch-top, .pitch-bottom{ position: relative; z-index: 1; }
+  .pitch-kicker{ margin: 0 0 6px; font-size: 16px; color: #163a2f; font-weight: 500; }
+  .pitch-title{ margin: 0 0 12px; font-size: 22px; font-weight: 900; color: #163a2f; }
+  .pitch-divider{ height: 1px; background: rgba(11,61,46,0.28); margin: 10px 0 18px; }
+  .pitch-plus{ display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+  .pitch-plus .plus{ font-size: 28px; line-height: 1; font-weight: 900; color: var(--blue); margin-top: 2px; }
+  .pitch-plus .plus-text{ font-size: 18px; font-weight: 900; color: #163a2f; }
+  .pitch-list{ list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .pitch-list li{ position: relative; padding-left: 28px; font-size: 14px; color: #163a2f; line-height: 1.55; }
+  .pitch-list li::before{ content:"✓"; position:absolute; left: 0; top: 0; font-weight: 900; color: var(--blue); }
+  .pitch-bottom{ display: flex; justify-content: center; }
+  .pitch-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 22px;
+    border-radius: 14px;
+    font-weight: 900;
+    text-decoration: none;
+    min-width: 220px;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--ent-1), var(--ent-2), var(--ent-3));
+    box-shadow: 0 22px 60px rgba(37,99,235,0.22);
+    transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  }
+  .pitch-btn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 22px 56px rgba(37,99,235,0.20);
+    filter: brightness(1.02);
+  }
+
+  @media (max-width: 1024px){
+    .pricing-grid{ grid-template-columns: 1fr; }
+  }
+  @media (max-width: 820px){
+    .compare-card.pill-mode{ padding: 16px 14px 14px; }
+    .plan-panel{ padding: 8px 0 0; }
+    .plan-panel .plan-col{ padding: 18px 16px; }
+    .plan-cta-row{ justify-content: center; }
+    .pitch-card{ padding: 24px 22px; }
+    .plan-btn, .pitch-btn{ width: 100%; min-width: 0; }
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-section{
+    padding:var(--section-y) 0;
+    background:#f8fafc;
+    text-align:center;
+  }
+  .faq-section h2{
+    font-size:36px;
+    font-weight:1000;
+    margin-bottom:8px;
+    padding:0 var(--pad-x);
+  }
+  .faq-subtext{
+    font-size:16px;
+    color:var(--muted-2);
+    margin-bottom:32px;
+    padding:0 var(--pad-x);
+  }
+  .faq-carousel{
+    max-width:1040px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:0 var(--pad-x);
+  }
+  .faq-track{
+    width:100%;
+    min-height:220px;
+    position:relative;
+    display:flex;
+    align-items:center;
+  }
+  .faq-item{
+    background:#fff;
+    padding:26px;
+    border-radius:16px;
+    text-align:left;
+    box-shadow:0 20px 44px rgba(15,23,42,0.06);
+    border:1px solid rgba(15,23,42,0.06);
+    display:none;
+    animation:fadeUp 220ms ease both;
+    width:100%;
+  }
+  .faq-item.active{ display:block; }
+  .faq-item h3{ font-size:18px; font-weight:900; margin-bottom:10px; }
+  .faq-item p{ font-size:15px; line-height:1.7; color:#475569; }
+  .faq-item a{ color:var(--blue-2); text-decoration:underline; }
+
+  .faq-nav{
+    border:none;
+    background:#fff;
+    font-size:24px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    color:#64748b;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(15,23,42,0.12);
+    transition:transform .18s ease, color .18s ease;
+    flex:0 0 auto;
+    transform: translateY(-2px);
+  }
+  .faq-nav:hover{ color:var(--blue-2); transform:scale(1.08); }
+  .faq-nav:focus-visible{ outline:3px solid rgba(10,102,194,0.35); outline-offset:3px; }
+
+  @media (max-width: 640px){
+    .faq-carousel{ flex-direction:column; }
+    .faq-nav{ width:100%; border-radius:14px; height:44px; }
+    .faq-section h2{ font-size:28px; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:22px var(--pad-x);
+    text-align:center;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    font-size:14px;
+    background:#fff;
+  }
   </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">
-    <img src="images/Device Control Plus_Black.png" alt="Device Control Plus">
+  <div class="header-inner">
+    <div class="logo">
+      <!-- Replace with your Device Control Plus logo -->
+      <img src="images/Device Control Plus_Black.png" alt="Device Control Plus logo">
+    </div>
+
+    <nav aria-label="Primary">
+      <a href="https://www.manageengine.com/device-control/features.html">Features</a>
+      <a href="https://www.manageengine.com/device-control/request-demo.html">Demo</a>
+      <a href="https://www.manageengine.com/device-control/help.html">Documents</a>
+      <a href="https://www.manageengine.com/device-control/get-quote.html">Get Quote</a>
+      <a href="https://www.manageengine.com/device-control/support.html">Support</a>
+    </nav>
   </div>
-  <nav>
-    <a href="https://www.manageengine.com/device-control/features.html">Features</a>
-    <a href="https://www.manageengine.com/device-control/request-demo.html">Demo</a>
-    <a href="https://www.manageengine.com/device-control/help.html">Documents</a>
-    <a href="https://www.manageengine.com/device-control/get-quote.html">Get Quote</a>
-    <a href="https://www.manageengine.com/device-control/support.html">Support</a>
-  </nav>
 </header>
 
 <section class="hero">
-  <h1>
-    Control USB and peripheral device access
-    <span>without disrupting productivity</span>
-  </h1>
-  <p>
-    Prevent unauthorized data transfers, enforce device policies and maintain
-    audit-ready visibility across endpoints.
-  </p>
+  <div class="container">
+    <h1>
+      <span class="hero-title-main">Control peripherals. Prevent data leaks.</span>
+      <span class="hero-title-sub">Keep productivity uninterrupted.</span>
+    </h1>
 
-  <div class="hero-buttons">
-    <div class="hero-cta">
-      <a class="btn btn-primary">Download</a>
-      <span class="cta-note">On-premises</span>
+    <div class="hero-buttons">
+      <div class="hero-cta">
+        <a href="https://www.manageengine.com/device-control/download.html" class="btn btn-primary">Download</a>
+        <span class="cta-note">On-premises</span>
+      </div>
+
+      <div class="hero-cta">
+        <a href="https://www.manageengine.com/products/desktop-central/cloud/" class="btn btn-primary">Sign up</a>
+        <span class="cta-note">Cloud via Endpoint Central</span>
+      </div>
     </div>
-    <div class="hero-cta">
-      <a class="btn btn-primary">Sign up</a>
-      <span class="cta-note">Cloud via Endpoint Central</span>
-    </div>
+
+    <small>30-day free trial · No credit card required · Free forever up to 25 endpoints</small>
   </div>
-
-  <small>30-day free trial · No credit card required · Free up to 25 endpoints forever</small>
 </section>
 
-<section class="global-proof">
+<section class="trust-logos-strip" aria-label="Trusted by leading brands worldwide">
+  <div class="container">
+    <div class="trust-head">
+      <p class="trust-kicker">Trusted by leading brands worldwide</p>
+    </div>
 
-  <section class="logo-strip">
-    <p class="logo-strip-title">Trusted by leading brands worldwide</p>
-
-    <div class="logo-marquee">
-      <div class="logo-track">
-        <!-- SET 1 -->
-        <div class="logo-set">
+    <div class="trust-logos-marquee" aria-label="Customer logos">
+      <div class="trust-logos-track">
+        <div class="trust-logos-set">
           <div class="logo-tile"><img src="images/nhs-logo.svg" alt="NHS"></div>
           <div class="logo-tile"><img src="images/kia-logo.svg" alt="Kia"></div>
           <div class="logo-tile"><img src="images/sandisk-logo.svg" alt="SanDisk"></div>
@@ -1270,127 +1241,21 @@ footer {
           <div class="logo-tile"><img src="images/victoria-police-logo.svg" alt="Victoria Police"></div>
         </div>
 
-        <!-- SET 2 (duplicate) -->
-        <div class="logo-set">
-          <div class="logo-tile"><img src="images/nhs-logo.svg" alt="NHS"></div>
-          <div class="logo-tile"><img src="images/kia-logo.svg" alt="Kia"></div>
-          <div class="logo-tile"><img src="images/sandisk-logo.svg" alt="SanDisk"></div>
-          <div class="logo-tile"><img src="images/fuji-logo.svg" alt="Fuji"></div>
-          <div class="logo-tile"><img src="images/doioig-logo.png" alt="Doioig"></div>
-          <div class="logo-tile"><img src="images/benelli-logo.svg" alt="Benelli"></div>
-          <div class="logo-tile"><img src="images/ineos-logo.svg" alt="Ineos"></div>
-          <div class="logo-tile"><img src="images/panasonic-logo.svg" alt="Panasonic"></div>
-          <div class="logo-tile"><img src="images/unisys-logo.svg" alt="Unisys"></div>
-          <div class="logo-tile"><img src="images/axa-logo.svg" alt="AXA"></div>
-          <div class="logo-tile"><img src="images/tokio-marine-logo.svg" alt="Tokio Marine"></div>
-          <div class="logo-tile"><img src="images/victoria-police-logo.svg" alt="Victoria Police"></div>
+        <div class="trust-logos-set" aria-hidden="true">
+          <div class="logo-tile"><img src="images/nhs-logo.svg" alt=""></div>
+          <div class="logo-tile"><img src="images/kia-logo.svg" alt=""></div>
+          <div class="logo-tile"><img src="images/sandisk-logo.svg" alt=""></div>
+          <div class="logo-tile"><img src="images/fuji-logo.svg" alt=""></div>
+          <div class="logo-tile"><img src="images/doioig-logo.png" alt=""></div>
+          <div class="logo-tile"><img src="images/benelli-logo.svg" alt=""></div>
+          <div class="logo-tile"><img src="images/ineos-logo.svg" alt=""></div>
+          <div class="logo-tile"><img src="images/panasonic-logo.svg" alt=""></div>
+          <div class="logo-tile"><img src="images/unisys-logo.svg" alt=""></div>
+          <div class="logo-tile"><img src="images/axa-logo.svg" alt=""></div>
+          <div class="logo-tile"><img src="images/tokio-marine-logo.svg" alt=""></div>
+          <div class="logo-tile"><img src="images/victoria-police-logo.svg" alt=""></div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="trust-section">
-    <div class="trust-container">
-
-      <div class="trust-stats">
-        <div class="stat"><h3>1M+</h3><p>endpoints secured</p></div>
-        <div class="stat"><h3>10+ years</h3><p>in the industry</p></div>
-        <div class="stat"><h3>100+</h3><p>countries served</p></div>
-        <div class="stat"><h3>2000+</h3><p>organizations worldwide</p></div>
-      </div>
-
-    </div>
-  </section>
-
-</section>
-
-<section class="features">
-  <div class="features-container">
-
-    <div class="features-intro">
-      <h2>
-        Insider threats cost organizations an average of
-        <span class="stat-highlight">$8.76M</span>
-        each year, and
-        <span class="stat-highlight">90%</span>
-        of the organizations feel vulnerable to insider threats via removable devices.
-      </h2>
-    </div>
-
-    <div class="features-grid">
-
-      <a href="https://www.manageengine.com/device-control/device-control.html" class="feature-card core">
-        <div class="feature-front">
-          <h3>Block USB & removable storage</h3>
-        </div>
-        <div class="feature-back">
-          <p>
-            Prevent unauthorized USB drives and removable media using centralized,
-            policy-driven controls across endpoints.
-          </p>
-        </div>
-      </a>
-
-      <a href="https://www.manageengine.com/device-control/file-tracing.html" class="feature-card core">
-        <div class="feature-front">
-          <h3>Audit file transfers with evidence</h3>
-        </div>
-        <div class="feature-back">
-          <p>
-            Capture shadow copies of file transfers with timestamps, users,
-            and device context for compliance audits.
-          </p>
-        </div>
-      </a>
-
-      <a href="https://www.manageengine.com/device-control/usb-encryption.html" class="feature-card core">
-        <div class="feature-front">
-          <h3>Enforce USB encryption</h3>
-        </div>
-        <div class="feature-back">
-          <p>
-            Ensure data is written only to encrypted and compliant USB devices
-            to prevent data leakage.
-          </p>
-        </div>
-      </a>
-
-      <a href="https://www.manageengine.com/device-control/temporary-access.html" class="feature-card core">
-        <div class="feature-front">
-          <h3>Just-in-time device access</h3>
-        </div>
-        <div class="feature-back">
-          <p>
-            Grant time-bound USB access for specific tasks and
-            automatically revoke permissions.
-          </p>
-        </div>
-      </a>
-
-      <a href="https://www.manageengine.com/device-control/trusted-devices.html" class="feature-card secondary">
-        <div class="feature-front">
-          <h3>Trusted devices</h3>
-        </div>
-        <div class="feature-back">
-          <p>
-            Allow only approved devices using vendor ID, serial number,
-            model, or device class.
-          </p>
-        </div>
-      </a>
-
-      <a href="https://www.manageengine.com/device-control/file-access-control.html" class="feature-card secondary">
-        <div class="feature-front">
-          <h3>File-level access control</h3>
-        </div>
-        <div class="feature-back">
-          <p>
-            Control read, write, and execute permissions by file type
-            to protect sensitive data formats.
-          </p>
-        </div>
-      </a>
-
     </div>
   </div>
 </section>
@@ -1402,7 +1267,8 @@ footer {
     <div class="carousel-viewport">
       <div class="carousel-track">
 
-        <div class="carousel-item active" data-title="Block USB">
+        <!-- BLOCK USB -->
+        <div class="carousel-item active" data-title="Rogue Devices">
           <div class="carousel-caption">
             <strong>Block unauthorized USB and removable storage</strong>
             <p>Stop data movement at the endpoint with policy-based device controls across teams and locations.</p>
@@ -1415,26 +1281,42 @@ footer {
           </div>
         </div>
 
-        <div class="carousel-item" data-title="Monitoring">
+        <!-- MONITORING -->
+        <div class="carousel-item" data-title="Visibility">
           <div class="carousel-caption">
-            <strong>File Shadowing & Transfer Visibility</strong>
+            <strong>File Shadowing and Transfer Visibility</strong>
             <p>Capture copies of files moved to removable devices for investigation and compliance.</p>
           </div>
 
           <div class="carousel-media">
-              <img src="images/Screenshot 2026-01-27 104837.png" alt="Device Control screenshot">
+            <img src="images/Screenshot 2026-01-27 104837.png" alt="Device Control screenshot">
           </div>
         </div>
 
-        <div class="carousel-item" data-title="JIT access">
+        <!-- JIT ACCESS -->
+        <div class="carousel-item" data-title="Excessive Access">
           <div class="carousel-caption">
             <strong>Grant just-in-time device access</strong>
-            <p>Allow time-bound access for specific users and tasks, then auto-revoke permissions.</p>
+            <p>Allow time-bound access for specific users and tasks, then automatically revoke permissions.</p>
           </div>
 
           <div class="carousel-media">
             <video autoplay muted loop playsinline>
               <source src="videos/jit.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <!-- USB ENCRYPTION -->
+        <div class="carousel-item" data-title="Unprotected USBs">
+          <div class="carousel-caption">
+            <strong>Enforce USB encryption policies</strong>
+            <p>Ensure sensitive data is written only to encrypted and compliant removable storage devices.</p>
+          </div>
+
+          <div class="carousel-media">
+            <video autoplay muted loop playsinline>
+              <source src="videos/encrption.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -1448,113 +1330,219 @@ footer {
   </div>
 </section>
 
-<section class="outcomes">
-  <div class="outcomes-container">
+<section class="features" id="features">
+  <h2 class="feature-heading">
+    Insider threats cost organizations an average of <span class="highlight">$8.76M</span> each year, and
+    <span class="highlight">90%</span> of the organizations feel vulnerable to insider threats via removable devices.
+  </h2>
 
-    <div class="outcomes-head">
-      <h2 class="outcomes-title">Security that delivers measurable outcomes</h2>
-      <p class="outcomes-sub">
-        Less removable-device risk, simpler compliance, and no impact on how teams work.
-      </p>
+  <div class="feature-grid">
+    <!-- LEFT CARD -->
+    <div class="card">
+      <h3>Prevent risky device access</h3>
+      <p>Stop unauthorized peripherals while allowing approved business workflows.</p>
+
+      <ul class="feature-list">
+        <li>
+          <strong><a href="https://www.manageengine.com/device-control/device-control.html">Block USB &amp; removable storage</a></strong>
+          <span>Prevent unauthorized USB drives and removable media using centralized, policy-driven controls across endpoints.</span>
+        </li>
+
+        <li>
+          <strong><a href="https://www.manageengine.com/device-control/trusted-devices.html">Trusted devices</a></strong>
+          <span>Allow only approved devices using vendor ID, serial number, model, or device class.</span>
+        </li>
+
+        <li>
+          <strong><a href="https://www.manageengine.com/device-control/temporary-access.html">Just-in-time device access</a></strong>
+          <span>Grant time-bound USB access for specific tasks and automatically revoke permissions.</span>
+        </li>
+      </ul>
     </div>
 
-    <div class="outcomes-grid">
+    <!-- RIGHT CARD -->
+    <div class="card">
+      <h3>Protect data leaving endpoints</h3>
+      <p>Enforce encryption and capture evidence for audits, compliance, and investigations.</p>
 
-      <div class="outcome-card">
-        <div class="outcome-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 1v6"/><path d="M8 7h8"/><path d="M7 7v16h10V7"/></svg>
-        </div>
-        <h3>Prevent data leaks</h3>
-        <p>Block unauthorized USB transfers and stop sensitive data from leaving endpoints.</p>
-      </div>
+      <ul class="feature-list">
+        <li>
+          <strong><a href="https://www.manageengine.com/device-control/file-tracing.html">Audit file transfers with evidence</a></strong>
+          <span>Capture shadow copies of file transfers with timestamps, users, and device context for compliance and investigations.</span>
+        </li>
 
-      <div class="outcome-card">
-        <div class="outcome-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 3l9 4v6c0 5-4 8-9 9-5-1-9-4-9-9V7l9-4z"/><path d="M9 12l2 2 4-5"/></svg>
-        </div>
-        <h3>Limit malware entry points</h3>
-        <p>Reduce attack surface by controlling untrusted removable devices and peripherals.</p>
-      </div>
+        <li>
+          <strong><a href="https://www.manageengine.com/device-control/usb-encryption.html">Enforce USB encryption</a></strong>
+          <span>Ensure data is written only to encrypted and compliant USB devices to prevent data leakage.</span>
+        </li>
 
-      <div class="outcome-card">
-        <div class="outcome-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M6 10V8a6 6 0 0 1 12 0v2"/><path d="M5 10h14v12H5z"/><path d="M12 14v4"/></svg>
-        </div>
-        <h3>Protect against USB theft</h3>
-        <p>Enforce encryption and device compliance so lost media doesn’t become a breach.</p>
-      </div>
-
-      <div class="outcome-card">
-        <div class="outcome-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M7 3h10v6H7z"/><path d="M5 9h14v12H5z"/><path d="M8 13h8"/><path d="M8 17h5"/></svg>
-        </div>
-        <h3>Stay audit-ready</h3>
-        <p>Maintain complete visibility with logs, reports, and compliance-ready evidence.</p>
-      </div>
-
+        <li>
+          <strong><a href="https://www.manageengine.com/device-control/file-access-control.html">File-level access control</a></strong>
+          <span>Control read, write, and execute permissions by file type to protect sensitive data formats.</span>
+        </li>
+      </ul>
     </div>
-  
-  <div class="outcomes-cta">
-  <p>Want to see how device policies work in your environment?</p>
-  <a href="#" class="outcomes-link">Request a demo →</a>
-</div>
+  </div>
+</section>
 
-</div>
-<section class="testimonials-section">
+<section class="flow-as-flip" id="flow">
+  <div class="features-container">
+    <div class="features-intro">
+      <!-- ✅ Updated to avoid “you already had visibility” implication -->
+      <h2>Know what connects. Control what leaves.</h2>
+      <p>Start by discovering connected devices, then define policies and enforce controls across endpoints.</p>
+    </div>
+
+    <div class="flow-wrap">
+      <div class="features-grid" aria-label="Discover to enforce workflow">
+        <a class="feature-card" href="#" aria-label="Discover">
+          <div class="feature-front"><h3>Discover</h3></div>
+          <div class="feature-back"><p>Identify connected devices and classify them across the organization.</p></div>
+        </a>
+
+
+        <a class="feature-card" href="#" aria-label="Define">
+          <div class="feature-front"><h3>Define</h3></div>
+          <div class="feature-back"><p>Create granular device policies for users, groups, and endpoint types.</p></div>
+        </a>
+
+        <a class="feature-card" href="#" aria-label="Enforce">
+          <div class="feature-front"><h3>Enforce</h3></div>
+          <div class="feature-back"><p>Block unauthorized device actions while keeping workflows uninterrupted.</p></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="outcomes-cta">
+      <p>Want to see device policies in action for your environment?</p>
+      <a href="https://www.manageengine.com/device-control/request-demo.html" class="outcomes-link">
+        Request a demo →
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="trust-metrics-band" aria-label="Key product metrics">
   <div class="container">
+    <div class="trust-head">
+      <p class="trust-kicker">Proven at scale</p>
+    </div>
 
-    <div class="testimonials-grid">
-      <div class="testimonial">
-        <p>“Immediate visibility and painless enforcement across endpoints.”</p>
-        <span>— IT Security Manager</span>
+    <div class="trust-metrics" aria-label="Key product metrics">
+      <div class="metric">
+        <strong>5M+</strong>
+        <span>endpoints secured</span>
       </div>
-
-      <div class="testimonial">
-        <p>“Audit-first rollout reduced risk without impacting productivity.”</p>
-        <span>— Head of Infrastructure</span>
+      <div class="metric">
+        <strong>8+ years</strong>
+        <span>in the industry</span>
+      </div>
+      <div class="metric">
+        <strong>100+</strong>
+        <span>countries served</span>
+      </div>
+      <div class="metric">
+        <strong>5000+</strong>
+        <span>organizations worldwide</span>
       </div>
     </div>
   </div>
 </section>
 
-</section>
+<section class="pricing-compare" id="pricing">
+  <div class="pricing-wrap">
+    <h2 class="pricing-title">Pick the right path to control</h2>
+    <p class="pricing-sub">Start free to validate policies. Upgrade when you’re ready to enforce controls at scale.</p>
 
-<section class="eval-soft">
-  <div class="eval-wrap">
-    <h2>Ready to evaluate?</h2>
-    <p class="eval-lead">
-      See how Device Control Plus works in your environment
-    </p>
-
-    <div class="eval-layout">
-      <div class="eval-panel">
-        <div class="eval-inner-center left">
-          <h3>Free Edition</h3>
-          <span class="eval-price">$0</span>
-          <p class="eval-meta">Up to 25 devices</p>
-          <a href="https://www.manageengine.com/device-control/download.html" class="eval-cta subtle">Get started</a>
+    <div class="pricing-grid">
+      <div class="compare-card pill-mode" aria-label="Plans">
+        <div class="plan-pills" role="tablist" aria-label="Choose an edition">
+          <div class="pills-shell">
+            <button class="pill-btn" type="button" role="tab" aria-selected="true"
+              aria-controls="plan-shared" id="pill-free" data-plan="free">
+              Free Edition
+            </button>
+            <button class="pill-btn" type="button" role="tab" aria-selected="false"
+              aria-controls="plan-shared" id="pill-pro" data-plan="pro">
+              Professional Edition
+            </button>
+          </div>
         </div>
+
+        <div class="plan-panel" id="plan-shared" role="tabpanel" aria-labelledby="pill-free">
+          <div class="plan-col">
+            <div class="plan-meta">
+              <div>
+                <h3 id="planTitle">Free Edition</h3>
+                <div class="plan-detail" id="planDetail">Free forever · Up to 25 endpoints</div>
+              </div>
+              <span class="plan-badge" id="planBadge">$0</span>
+            </div>
+
+            <div class="plan-price">
+              <span class="plan-kicker">STARTS AT</span>
+              <div class="plan-amount-row">
+                <span class="amt" id="planAmt">$0</span>
+                <span class="unit" id="planUnit">up to 25 endpoints</span>
+              </div>
+            </div>
+
+            <div class="plan-divider" aria-hidden="true"></div>
+
+            <ul class="plan-list" aria-label="Included features">
+              <li>Control USB and removable storage</li>
+              <li>Audit device usage and file transfers</li>
+              <li>Restrict device access by user/group</li>
+              <li>Reporting for compliance and investigations</li>
+              <li>Policy-based enforcement</li>
+            </ul>
+
+            <div class="plan-cta-row">
+              <a href="#" class="plan-btn outline" id="planCta">Get started</a>
+            </div>
+          </div>
+        </div>
+
+        <p class="pricing-footnote" id="pricingFootnote" style="display:none;">
+          The above-mentioned price is for 1000 endpoints. As the number of endpoints increases, the price per endpoint decreases.<br/>
+          For more details on pricing for different endpoint counts, please visit
+          <a href="https://store.manageengine.com/device-control/" target="_blank" rel="noopener">
+            ManageEngine Store
+          </a>
+        </p>
       </div>
 
-      <div class="eval-panel primary">
-        <h3>Professional Edition</h3>
-        <span class="eval-price">$6 <small>per device per year</small></span>
-        <p class="eval-meta">As the number of devices increases, the price per device decreases</p>
+      <aside class="pitch-card" aria-label="Endpoint Central Cloud pitch">
+        <div class="pitch-top">
+          <p class="pitch-kicker">Want complete endpoint protection?</p>
+          <h3 class="pitch-title">Explore Endpoint Central</h3>
 
-        <a href="https://www.manageengine.com/device-control/download.html" class="eval-cta strong">Start free trial</a>
-        <small style="display:block; margin-top:8px; color:#64748b; font-size:12px;">
-          For more pricing details, visit
-          <a href="https://store.manageengine.com/device-control/" style="color:var(--blue); text-decoration:underline;">ManageEngine Store</a>
-        </small>
-      </div>
+          <div class="pitch-divider" aria-hidden="true"></div>
+
+          <div class="pitch-block">
+            <div class="pitch-plus">
+              <span class="plus">+</span>
+              <span class="plus-text">Everything in Device Control Plus</span>
+            </div>
+
+            <ul class="pitch-list">
+              <li>Vulnerability management</li>
+              <li>Patch Management</li>
+              <li>Enterprise data security</li>
+              <li>Application and privilege management</li>
+              <li>Malware protection</li>
+              <li>Enterprise browser security</li>
+              <li>Data leakage prevention</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pitch-bottom">
+          <a class="pitch-btn" href="https://www.manageengine.com/products/desktop-central/cloud/">Explore now</a>
+        </div>
+      </aside>
     </div>
   </div>
-
-  <p style="text-align:center; font-size:12px; color:#64748b; margin-top:16px;">
-    For complete endpoint management and security,
-    <a href="https://www.manageengine.com/products/desktop-central/" style="color:var(--blue); text-decoration:underline;">ManageEngine Endpoint Central</a>
-    is the recommended solution.
-  </p>
 </section>
 
 <section class="faq-section">
@@ -1563,15 +1551,15 @@ footer {
     <p class="faq-subtext">Answers to common evaluation questions</p>
 
     <div class="faq-carousel">
-      <button class="faq-nav prev">‹</button>
+      <button class="faq-nav prev" type="button" aria-label="Previous FAQ">‹</button>
 
       <div class="faq-track">
         <div class="faq-item active">
           <h3>Can I get a demo of ManageEngine Device Control Plus?</h3>
           <p>
-            Yes, you can request a
-            <a href="https://www.manageengine.com/device-control/request-demo.html">personalized demo</a>
-            to understand how Device Control Plus monitors, audits, and controls USB and peripheral usage across endpoints.
+            Yes, you can request a personalized
+            <a href="https://www.manageengine.com/device-control/request-demo.html">demo</a>
+            to see how device policies and auditing work across endpoints.
           </p>
         </div>
 
@@ -1581,25 +1569,17 @@ footer {
         </div>
 
         <div class="faq-item">
-          <h3>Is support available for the Free Edition?</h3>
-          <p>
-            Yes, ManageEngine Device Control Plus provides technical support for the Free Edition,
-            in addition to access to product documentation and knowledge base resources.
-          </p>
+          <h3>Can I audit first before enforcing restrictions?</h3>
+          <p>Yes. Start in audit mode to understand device usage patterns, then enforce policies confidently.</p>
         </div>
 
         <div class="faq-item">
-          <h3>Is Device Control Plus enough for complete endpoint management?</h3>
-          <p>
-           Device Control Plus focuses on securing data movement through USBs and peripherals.
-For organizations looking to manage patches, vulnerabilities, software, and endpoint configurations alongside device control,
-            <a href="https://www.manageengine.com/products/desktop-central/">ManageEngine Endpoint Central</a>
-            provides a broader, unified approach.
-          </p>
+          <h3>Which device types can be controlled?</h3>
+          <p>USB storage, printers, and other common peripherals can be managed using granular policies.</p>
         </div>
       </div>
 
-      <button class="faq-nav next">›</button>
+      <button class="faq-nav next" type="button" aria-label="Next FAQ">›</button>
     </div>
   </div>
 </section>
@@ -1608,9 +1588,8 @@ For organizations looking to manage patches, vulnerabilities, software, and endp
   © 2026 Device Control Plus. All rights reserved.
 </footer>
 
-
 <script>
-  /* ================= CAROUSEL (NAV PILLS + NO AUTOSCROLL) ================= */
+  /* ================= CAROUSEL (NO AUTOSCROLL) ================= */
   const carouselEl = document.querySelector(".carousel");
   const slides = carouselEl.querySelectorAll(".carousel-item");
   const prevBtn = carouselEl.querySelector(".carousel-btn.prev");
@@ -1621,14 +1600,13 @@ For organizations looking to manage patches, vulnerabilities, software, and endp
   function stopAllMedia() {
     slides.forEach((s) => {
       const v = s.querySelector("video");
-      if (v) v.pause();
+      if (v) { try { v.pause(); } catch (_) {} }
     });
   }
-
   function playActiveMedia() {
     const active = slides[currentIndex];
     const v = active.querySelector("video");
-    if (v) v.play().catch(() => {});
+    if (v) { try { v.play(); } catch (_) {} }
   }
 
   function setActive(index) {
@@ -1639,7 +1617,7 @@ For organizations looking to manage patches, vulnerabilities, software, and endp
 
     const dots = nav.querySelectorAll(".carousel-dot");
     dots.forEach((d) => d.classList.remove("active"));
-    dots[currentIndex]?.classList.add("active");
+    if (dots[currentIndex]) dots[currentIndex].classList.add("active");
 
     stopAllMedia();
     playActiveMedia();
@@ -1652,14 +1630,15 @@ For organizations looking to manage patches, vulnerabilities, software, and endp
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "carousel-dot";
+      btn.setAttribute("aria-label", `Go to ${label}`);
       btn.innerHTML = `<span class="pill" aria-hidden="true"></span>${label}`;
       btn.addEventListener("click", () => setActive(i));
       nav.appendChild(btn);
     });
   }
 
-  prevBtn?.addEventListener("click", () => setActive(currentIndex - 1));
-  nextBtn?.addEventListener("click", () => setActive(currentIndex + 1));
+  prevBtn.addEventListener("click", () => setActive(currentIndex - 1));
+  nextBtn.addEventListener("click", () => setActive(currentIndex + 1));
 
   carouselEl.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") setActive(currentIndex - 1);
@@ -1680,14 +1659,77 @@ For organizations looking to manage patches, vulnerabilities, software, and endp
     faqItems.forEach((item) => item.classList.remove("active"));
     faqItems[faqIndex].classList.add("active");
   }
-
   faqNext.addEventListener("click", () => showFaq(faqIndex + 1));
   faqPrev.addEventListener("click", () => showFaq(faqIndex - 1));
   showFaq(0);
+
+  /* ================= PRICING PILLS + FOOTNOTE TOGGLE ================= */
+  const pricingPills = document.querySelectorAll(".pill-btn[data-plan]");
+  const planShared = document.getElementById("plan-shared");
+
+  const planTitle  = document.getElementById("planTitle");
+  const planDetail = document.getElementById("planDetail");
+  const planBadge  = document.getElementById("planBadge");
+  const planAmt    = document.getElementById("planAmt");
+  const planUnit   = document.getElementById("planUnit");
+  const planCta    = document.getElementById("planCta");
+
+  const pricingFootnote = document.getElementById("pricingFootnote");
+
+  /* ✅ FIXED: syntax + missing fields */
+  const plans = {
+    free: {
+      title: "Free Edition",
+      detail: "Free forever · Up to 25 endpoints",
+      badge: "$0",
+      amt: "$0",
+      unit: "up to 25 endpoints",
+      ctaText: "Get started",
+      ctaHref: "#"
+    },
+    pro: {
+      title: "Professional Edition",
+      detail: "Starts at $4/endpoint/year (billed annually)",
+      badge: "$4",
+      amt: "$4",
+      unit: "/endpoint per year",
+      ctaText: "Start free trial",
+      ctaHref: "https://www.manageengine.com/device-control/download.html"
+    }
+  };
+
+  function setPlan(planKey){
+    const p = plans[planKey];
+
+    pricingPills.forEach(btn => {
+      btn.setAttribute("aria-selected", String(btn.dataset.plan === planKey));
+    });
+
+    const activePill = document.querySelector(`.pill-btn[data-plan="${planKey}"]`);
+    if (activePill) planShared.setAttribute("aria-labelledby", activePill.id);
+
+    planTitle.textContent = p.title;
+    planDetail.textContent = p.detail;
+    planBadge.textContent = p.badge;
+    planAmt.textContent = p.amt;
+    planUnit.textContent = p.unit;
+    planCta.textContent = p.ctaText;
+    planCta.href = p.ctaHref;
+
+    planCta.classList.remove("solid", "outline");
+    planCta.classList.add(planKey === "pro" ? "solid" : "outline");
+
+    if (pricingFootnote) {
+      pricingFootnote.style.display = (planKey === "pro") ? "block" : "none";
+    }
+  }
+
+  pricingPills.forEach(btn => {
+    btn.addEventListener("click", () => setPlan(btn.dataset.plan));
+  });
+
+  setPlan("free");
 </script>
 
 </body>
 </html>
-
-
-
