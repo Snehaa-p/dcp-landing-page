@@ -545,31 +545,7 @@
     .carousel-track{ min-height:420px; }
     .carousel-caption strong{ font-size:30px; }
   }
-.carousel-media{
-  width:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
 
-/* ✅ Normalize ALL media visually */
-.carousel-media img{
-  max-width: 720px;      /* match video visual width */
-  width: 100%;
-  height: 420px;         /* key fix */
-  object-fit: contain;   /* prevents cropping */
-  border-radius: 18px;
-  box-shadow: 0 18px 38px rgba(0,0,0,0.35);
-  background: rgba(255,255,255,0.02); /* prevents harsh edges */
-}
-
-/* Keep videos visually consistent */
-.carousel-media video{
-  max-width: 720px;
-  width:100%;
-  border-radius:18px;
-  box-shadow: 0 18px 38px rgba(0,0,0,0.40);
-}
   /* ---------- FEATURES ---------- */
   .features{
     padding:var(--section-y) 0;
@@ -1197,6 +1173,31 @@
     font-size:14px;
     background:#fff;
   }
+  .carousel-media{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* ✅ Normalize ALL media visually */
+.carousel-media img{
+  max-width: 720px;      /* match video visual width */
+  width: 100%;
+  height: 420px;         /* key fix */
+  object-fit: contain;   /* prevents cropping */
+  border-radius: 18px;
+  box-shadow: 0 18px 38px rgba(0,0,0,0.35);
+  background: rgba(255,255,255,0.02); /* prevents harsh edges */
+}
+
+/* Keep videos visually consistent */
+.carousel-media video{
+  max-width: 720px;
+  width:100%;
+  border-radius:18px;
+  box-shadow: 0 18px 38px rgba(0,0,0,0.40);
+}
   </style>
 </head>
 
@@ -1205,7 +1206,6 @@
 <header>
   <div class="header-inner">
     <div class="logo">
-      <!-- Replace with your Device Control Plus logo -->
       <img src="images/Device Control Plus_Black.png" alt="Device Control Plus logo">
     </div>
 
@@ -1222,8 +1222,7 @@
 <section class="hero">
   <div class="container">
     <h1>
-      <span class="hero-title-main">Control peripherals. Prevent data leaks.</span>
-      <span class="hero-title-sub">Keep productivity uninterrupted.</span>
+      <span class="hero-title-main">Smarter device control. Stronger data protection.</span>
     </h1>
 
     <div class="hero-buttons">
@@ -1291,37 +1290,11 @@
     <div class="carousel-viewport">
       <div class="carousel-track">
 
-        <!-- BLOCK USB -->
-        <div class="carousel-item active" data-title="Rogue Devices">
-          <div class="carousel-caption">
-            <strong>Block unauthorized USB and removable storage</strong>
-            <p>Stop data movement at the endpoint with policy-based device controls across teams and locations.</p>
-          </div>
-
-          <div class="carousel-media">
-            <video autoplay muted loop playsinline>
-              <source src="videos/usbblock.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-
-        <!-- MONITORING -->
-        <div class="carousel-item" data-title="Visibility">
-          <div class="carousel-caption">
-            <strong>File Shadowing and Transfer Visibility</strong>
-            <p>Capture copies of files moved to removable devices for investigation and compliance.</p>
-          </div>
-
-          <div class="carousel-media">
-            <img src="images/Screenshot 2026-01-27 104837.png" alt="Device Control screenshot">
-          </div>
-        </div>
-
-        <!-- JIT ACCESS -->
-        <div class="carousel-item" data-title="Excessive Access">
+        <!-- 1) JUST-IN-TIME ACCESS -->
+        <div class="carousel-item active" data-title="Time-bound access">
           <div class="carousel-caption">
             <strong>Grant just-in-time device access</strong>
-            <p>Allow time-bound access for specific users and tasks, then automatically revoke permissions.</p>
+            <p>Allow temporary device access for specific users and tasks, then automatically revoke permissions.</p>
           </div>
 
           <div class="carousel-media">
@@ -1331,8 +1304,8 @@
           </div>
         </div>
 
-        <!-- USB ENCRYPTION -->
-        <div class="carousel-item" data-title="Unprotected USBs">
+        <!-- 2) USB ENCRYPTION -->
+        <div class="carousel-item" data-title="Encrypted USBs">
           <div class="carousel-caption">
             <strong>Enforce USB encryption policies</strong>
             <p>Ensure sensitive data is written only to encrypted and compliant removable storage devices.</p>
@@ -1340,7 +1313,47 @@
 
           <div class="carousel-media">
             <video autoplay muted loop playsinline>
-              <source src="videos/encrption.mp4" type="video/mp4">
+              <source src="videos/encryption.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <!-- 3) VISIBILITY / EVIDENCE -->
+        <div class="carousel-item" data-title="Transfer evidence">
+          <div class="carousel-caption">
+            <strong>Keep evidence of file transfers</strong>
+            <p>Capture copies of files moved to removable devices to support audits, investigations, and compliance.</p>
+          </div>
+
+          <div class="carousel-media">
+            <img src="images/Screenshot 2026-01-27 104837.png" alt="File transfer evidence and visibility screenshot">
+          </div>
+        </div>
+
+        <!-- 4) FILE ACCESS CONTROL (doc-aligned) -->
+        <div class="carousel-item" data-title="File permissions">
+          <div class="carousel-caption">
+            <strong>Control file access on USB devices</strong>
+            <p>Assign file system permissions like read-only access, allow file creation/modification on USB, or permit file movement from USB to a computer for trusted users.</p>
+          </div>
+
+          <div class="carousel-media">
+            <video autoplay muted loop playsinline>
+              <source src="videos/fileaccess.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <!-- 5) BLOCK PERIPHERALS -->
+        <div class="carousel-item" data-title="Block peripherals">
+          <div class="carousel-caption">
+            <strong>Block unauthorized USB and peripherals</strong>
+            <p>Stop risky devices at the endpoint with centralized policies across teams and locations.</p>
+          </div>
+
+          <div class="carousel-media">
+            <video autoplay muted loop playsinline>
+              <source src="videos/usbblock.mp4" type="video/mp4">
             </video>
           </div>
         </div>
@@ -1356,14 +1369,14 @@
 
 <section class="features" id="features">
   <h2 class="feature-heading">
-    Insider threats cost organizations an average of <span class="highlight">$8.76M</span> each year, and
-    <span class="highlight">90%</span> of the organizations feel vulnerable to insider threats via removable devices.
+    Control device access and file transfers to prevent <span class="highlight">data compromise </span> and 
+    <span class="highlight">device-borne malware</span>.
   </h2>
 
   <div class="feature-grid">
     <!-- LEFT CARD -->
     <div class="card">
-      <h3>Prevent risky device access</h3>
+      <h3>Enforce device usage policies</h3>
       <p>Stop unauthorized peripherals while allowing approved business workflows.</p>
 
       <ul class="feature-list">
@@ -1373,9 +1386,15 @@
         </li>
 
         <li>
-          <strong><a href="https://www.manageengine.com/device-control/trusted-devices.html">Trusted devices</a></strong>
-          <span>Allow only approved devices using vendor ID, serial number, model, or device class.</span>
-        </li>
+  <strong>
+    <a href="https://www.manageengine.com/device-control/file-tracing.html">
+      Monitor and audit device activities
+    </a>
+  </strong>
+  <span>
+    Track device usage, file movements, and user actions to support security monitoring, investigations, and compliance reporting.
+  </span>
+</li>
 
         <li>
           <strong><a href="https://www.manageengine.com/device-control/temporary-access.html">Just-in-time device access</a></strong>
@@ -1386,7 +1405,7 @@
 
     <!-- RIGHT CARD -->
     <div class="card">
-      <h3>Protect data leaving endpoints</h3>
+      <h3>Enforce data protection policies</h3>
       <p>Enforce encryption and capture evidence for audits, compliance, and investigations.</p>
 
       <ul class="feature-list">
@@ -1593,15 +1612,14 @@
         </div>
 
         <div class="faq-item">
-          <h3>Is support available for the Free Edition?</h3>
-          <p>Yes, Device Control Plus provides technical support for the Free Edition, along with access to product documentation and knowledge base resources.</p>
-        </div>
-        
-        <div class="faq-item">
           <h3>Can I audit first before enforcing restrictions?</h3>
           <p>Yes. Start in audit mode to understand device usage patterns, then enforce policies confidently.</p>
         </div>
 
+        <div class="faq-item">
+          <h3>Which device types can be controlled?</h3>
+          <p>USB storage, printers, and other common peripherals can be managed using granular policies.</p>
+        </div>
       </div>
 
       <button class="faq-nav next" type="button" aria-label="Next FAQ">›</button>
@@ -1758,5 +1776,3 @@
 
 </body>
 </html>
-
-
