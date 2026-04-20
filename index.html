@@ -1,1579 +1,904 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Device Control Plus</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-  :root{
-  --blue:#0B3D2E;
-  --blue-2:#19A974;
-  --red:#e53935;
-
-  --dark:#0f172a;
-  --muted:#6b7280;
-  --muted-2:#64748b;
-  --border:#e5e7eb;
-  --bg-light:#f6fbf9;
-
-  --radius:16px;
-  --shadow-sm:0 10px 24px rgba(15,23,42,0.08);
-  --shadow-md:0 20px 40px rgba(15,23,42,0.10);
-  --shadow-lg:0 32px 72px rgba(15,23,42,0.12);
-
-  --container:1280px;
-  --pad-x:24px;
-  --section-y:72px;
-
-  --ent-1:#06281F;
-  --ent-2:#0B3D2E;
-  --ent-3:#2DBA8A;
-
-  --wash-1:#F6FBF9;
-  --wash-2:#FFFFFF;
-  --wash-3:#F3F6F8;
-
-  --hero-trust:#eef5f2;
-  --hero-trust-2:#f2f7f4;
-}
-
-*{ box-sizing:border-box; margin:0; padding:0; }
-html,body{ height:100%; }
-
-body{
-  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  color:var(--dark);
-  background:#fff;
-  line-height:1.6;
-}
-
-img,video{ max-width:100%; height:auto; display:block; }
-a{ color:inherit; }
-
-.container{
-  max-width:var(--container);
-  margin:0 auto;
-  padding:0 var(--pad-x);
-}
-
-/* ---------- HEADER ---------- */
-header{
-  background:#fff;
-  border-bottom:0 !important;
-}
-
-.header-inner{
-  max-width:var(--container);
-  margin:0 auto;
-  padding:16px var(--pad-x);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-  width:100%;
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  white-space:nowrap;
-}
-
-.logo img{
-  height:38px;
-  width:auto;
-}
-
-nav{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-}
-
-nav a{
-  text-decoration:none;
-  color:var(--dark);
-  font-weight:500;
-  padding:8px 10px;
-  border-radius:10px;
-  transition:background .18s ease, color .18s ease;
-}
-
-nav a:hover{
-  background:#f1f5f9;
-  color:#0b1220;
-}
-
-@media (max-width:820px){
-  :root{ --pad-x:18px; }
-
-  .header-inner{
-    padding:14px var(--pad-x);
-    flex-direction:column;
-    align-items:flex-start;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Device Control Plus – Authorize, Authenticate & Audit Every Device</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #112244;
+    --navy-light: #1a3360;
+    --accent: #2d6ef5;
+    --accent-light: #5b8ff8;
+    --accent-glow: rgba(45,110,245,0.18);
+    --teal: #00c9a7;
+    --teal-dim: rgba(0,201,167,0.12);
+    --amber: #f5a623;
+    --surface: #f7f8fc;
+    --surface-2: #eef1f9;
+    --border: rgba(10,22,40,0.1);
+    --border-strong: rgba(10,22,40,0.2);
+    --text: #0a1628;
+    --text-2: #3d5275;
+    --text-3: #7a90b0;
+    --white: #ffffff;
+    --radius: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
-  nav{
-    width:100%;
-    justify-content:flex-start;
-    gap:8px;
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo img { height: 28px; }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-2); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { background: var(--accent); color: #fff; padding: 8px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background .2s, transform .15s; }
+  .nav-cta:hover { background: #1a56d4; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(155deg, var(--navy) 0%, var(--navy-mid) 55%, #0d2050 100%);
+    color: #fff;
+    padding: 90px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(45,110,245,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(45,110,245,0.2); border: 1px solid rgba(45,110,245,0.4);
+    color: var(--accent-light); font-size: 12px; font-weight: 600; letter-spacing: .08em;
+    padding: 5px 12px; border-radius: 100px; margin-bottom: 20px; text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  .hero h1 span { color: var(--teal); }
+  .hero-sub {
+    font-size: 18px; font-weight: 300; color: rgba(255,255,255,0.72); line-height: 1.65;
+    margin-bottom: 36px; max-width: 520px;
+  }
+  .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    padding: 14px 28px; border-radius: 10px;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: background .2s, transform .15s;
+    box-shadow: 0 4px 20px rgba(45,110,245,0.4);
+  }
+  .btn-primary:hover { background: #1a56d4; transform: translateY(-2px); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.1); color: #fff;
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 14px 24px; border-radius: 10px;
+    font-size: 15px; font-weight: 500; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: background .2s;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.18); }
+  .hero-note { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 14px; }
+  .hero-image-wrap {
+    position: relative;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    padding: 8px;
+  }
+  .hero-image-wrap img {
+    width: 100%; border-radius: 18px; display: block;
+  }
+  .hero-image-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: var(--radius-xl);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+    pointer-events: none;
   }
 
-  nav a{
-    background:#f8fafc;
-    border:1px solid rgba(15,23,42,0.06);
+  /* LOGOS BAND */
+  .logos-band {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 5%;
+    overflow: hidden;
   }
-}
-
-/* =========================================================
-HERO
-========================================================= */
-.hero{
-  position:relative;
-  overflow:hidden;
-  padding:56px 0 56px;
-  background:
-    radial-gradient(1200px 520px at 50% 18%,
-      rgba(255,255,255,0.90),
-      rgba(255,255,255,0.68) 48%,
-      rgba(255,255,255,0.00) 78%
-    ),
-    radial-gradient(circle at 18% 18%, rgba(25,169,116,0.08), transparent 62%),
-    radial-gradient(circle at 84% 14%, rgba(11,61,46,0.06), transparent 62%),
-    linear-gradient(180deg, var(--wash-1) 0%, var(--hero-trust) 100%);
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 1px 1px, rgba(15,23,42,0.024) 1px, transparent 3px)
-    0 0 / 16px 16px;
-  -webkit-mask-image: linear-gradient(
-    180deg,
-    rgba(0,0,0,0.40) 0%,
-    rgba(0,0,0,0.16) 38%,
-    rgba(0,0,0,0.05) 60%,
-    rgba(0,0,0,0.00) 88%
-  );
-  mask-image: linear-gradient(
-    180deg,
-    rgba(0,0,0,0.40) 0%,
-    rgba(0,0,0,0.16) 38%,
-    rgba(0,0,0,0.05) 60%,
-    rgba(0,0,0,0.00) 88%
-  );
-}
-
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:-220px;
-  z-index:0;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 18% 18%, rgba(25,169,116,0.08), transparent 62%),
-    radial-gradient(circle at 84% 14%, rgba(11,61,46,0.06), transparent 62%);
-  filter:blur(12px);
-}
-
-.hero > .container{
-  position:relative;
-  z-index:1;
-}
-
-.hero-layout{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:32px;
-}
-
-.hero-content{
-  text-align:center;
-  max-width:720px;
-}
-
-.hero-title-main{
-  color:#0b1220;
-  font-weight:800;
-  font-size:40px;
-  letter-spacing:-0.048em;
-  line-height:1.05;
-}
-
-.hero-buttons{
-  display:flex;
-  justify-content:center;
-  gap:24px;
-  flex-wrap:wrap;
-  margin-top:22px;
-}
-
-.hero-cta{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
-}
-
-.btn{
-  min-width:220px;
-  padding:14px 28px;
-  font-size:14px;
-  font-weight:800;
-  border-radius:12px;
-  text-decoration:none;
-  transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
-  display:inline-block;
-  text-align:center;
-  border:2px solid transparent;
-  user-select:none;
-}
-
-.btn-primary{
-  background:var(--red);
-  color:#fff;
-  box-shadow:0 10px 24px rgba(229,57,53,0.30);
-}
-
-.btn-primary:hover{
-  transform:translateY(-1px);
-  box-shadow:0 16px 40px rgba(0,0,0,0.24);
-  filter:brightness(1.02);
-}
-
-.btn:focus-visible{
-  outline:3px solid rgba(255,255,255,0.35);
-  outline-offset:3px;
-}
-
-.cta-note{
-  font-size:12px;
-  font-weight:600;
-  color:#0f172a;
-  opacity:0.9;
-  text-align:center;
-}
-
-.hero small{
-  display:block;
-  margin-top:20px;
-  color:#334155;
-  font-size:12px;
-  font-weight:600;
-  opacity:0.95;
-  text-align:center;
-  padding-left:0;
-}
-
-.hero-visual{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  width:100%;
-}
-
-.hero-ui-frame{
-  width:100%;
-  max-width:900px;
-  border-radius:28px;
-  background:rgba(255,255,255,0.78);
-  border:1px solid rgba(15,23,42,0.07);
-  box-shadow:
-    0 24px 56px rgba(15,23,42,0.12),
-    0 10px 24px rgba(15,23,42,0.06);
-  backdrop-filter:blur(10px);
-}
-
-.hero-ui-frame img{
-  width:100%;
-  height:auto;
-  display:block;
-  border-radius:20px;
-  box-shadow:0 8px 20px rgba(15,23,42,0.07);
-  background:#fff;
-}
-
-.hero-bridge{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:-1px;
-  height:120px;
-  pointer-events:none;
-  z-index:0;
-  background:
-    linear-gradient(180deg,
-      rgba(238,245,242,0) 0%,
-      rgba(238,245,242,0.38) 42%,
-      rgba(238,245,242,0.82) 78%,
-      var(--hero-trust) 100%
-    );
-}
-
-@media (max-width:1100px){
-  .hero{
-    padding:48px 0 20px;
+  .logos-label {
+    text-align: center;
+    font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--text-3); margin-bottom: 22px;
+  }
+  .logos-track-wrap { overflow: hidden; }
+  .logos-track {
+    display: flex; align-items: center; gap: 56px;
+    animation: scroll-logos 28s linear infinite;
+    width: max-content;
+  }
+  .logos-track img { height: 28px; filter: grayscale(0%) opacity(1); transition: filter .3s; }
+ 
+  @keyframes scroll-logos {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
-  .hero-content{
-    max-width:none;
-    text-align:center;
+  /* SECTION WRAPPER */
+  section { padding: 96px 5%; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 14px;
+  }
+  .section-heading {
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 600; letter-spacing: -0.02em; line-height: 1.2;
+    color: var(--text); margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 18px; font-weight: 300; color: var(--text-2); max-width: 600px; line-height: 1.65;
   }
 
-  .hero-title-main{
-    font-size:44px;
+  /* CAPABILITIES */
+  .capabilities { background: var(--white); }
+  .cap-tabs {
+    display: flex; gap: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden; margin-bottom: 48px;
+    width: fit-content;
+    background: var(--surface);
+  }
+  .cap-tab {
+    padding: 11px 22px;
+    font-size: 14px; font-weight: 500; color: var(--text-2);
+    border: none; background: none; cursor: pointer;
+    transition: all .2s; border-right: 1px solid var(--border);
+  }
+  .cap-tab:last-child { border-right: none; }
+  .cap-tab.active {
+    background: var(--navy); color: #fff;
+  }
+  .cap-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .cap-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    background: var(--white);
+    transition: border-color .2s, transform .2s, box-shadow .2s;
+    cursor: default;
+  }
+  .cap-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(45,110,245,0.1);
+  }
+  .cap-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface-2); margin-bottom: 16px;
+  }
+  .cap-icon svg { width: 22px; height: 22px; color: var(--accent); }
+  .cap-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+  .cap-card p { font-size: 14px; color: var(--text-2); line-height: 1.6; }
+  .cap-card a { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 600; margin-top: 14px; display: inline-block; }
+  .cap-card a:hover { text-decoration: underline; }
+
+  /* DEMO SECTION */
+  .demo-section {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: #fff;
+  }
+  .demo-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .demo-form-wrap {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-xl);
+    padding: 36px;
+  }
+  .demo-form-wrap h3 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+  .demo-form-wrap p { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 28px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .form-group label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.6); letter-spacing: .04em; }
+  .form-group input, .form-group select {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px; font-family: inherit;
+    color: #fff; outline: none;
+    transition: border-color .2s;
+  }
+  .form-group input::placeholder { color: rgba(255,255,255,0.3); }
+  .form-group input:focus, .form-group select:focus { border-color: var(--accent-light); }
+  .form-group select option { color: #000; }
+  .btn-demo {
+    width: 100%; background: var(--teal);
+    color: var(--navy); font-weight: 700; font-size: 15px;
+    padding: 14px; border-radius: 10px; border: none;
+    cursor: pointer; font-family: inherit;
+    transition: opacity .2s, transform .15s;
+    margin-top: 8px;
+  }
+  .btn-demo:hover { opacity: 0.88; transform: translateY(-1px); }
+  .demo-content h2 { font-size: clamp(26px, 2.5vw, 38px); font-weight: 600; margin-bottom: 20px; line-height: 1.2; }
+  .demo-benefits { list-style: none; display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+  .demo-benefits li { display: flex; gap: 14px; align-items: flex-start; }
+  .benefit-dot {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--teal-dim); border: 1px solid rgba(0,201,167,0.3);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .benefit-dot svg { width: 16px; height: 16px; color: var(--teal); }
+  .demo-benefits li div h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .demo-benefits li div p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+  /* INDUSTRY */
+  .industry { background: var(--surface); }
+  .industry-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px;
+  }
+  .industry-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    transition: border-color .2s, box-shadow .2s, transform .2s;
+  }
+  .industry-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 28px rgba(45,110,245,0.1);
+    transform: translateY(-3px);
+  }
+  .industry-icon { font-size: 28px; margin-bottom: 14px; }
+  .industry-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  .industry-card p { font-size: 13px; color: var(--text-2); line-height: 1.55; margin-bottom: 14px; }
+  .compliance-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ctag {
+    font-size: 11px; font-weight: 700; letter-spacing: .06em;
+    padding: 3px 9px; border-radius: 100px;
+    background: var(--surface-2); color: var(--accent);
+    border: 1px solid rgba(45,110,245,0.2);
   }
 
-  .hero-buttons{
-    justify-content:center;
+  /* PRICING */
+  .pricing { background: var(--white); }
+  .pricing-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 48px;
+  }
+  .pricing-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    position: relative;
+    background: var(--white);
+    transition: box-shadow .2s;
+  }
+  .pricing-card:hover { box-shadow: 0 8px 40px rgba(10,22,40,0.1); }
+  .pricing-card.featured {
+    border: 2px solid var(--accent);
+    background: var(--navy);
+    color: #fff;
+  }
+  .featured-badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #fff;
+    font-size: 11px; font-weight: 700; letter-spacing: .08em;
+    padding: 4px 14px; border-radius: 100px; text-transform: uppercase;
+  }
+  .plan-name { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; }
+  .featured .plan-name { color: rgba(255,255,255,0.5); }
+  .plan-price { font-size: 40px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .plan-price span { font-size: 18px; font-weight: 400; }
+  .plan-desc { font-size: 13px; color: var(--text-2); margin-bottom: 24px; }
+  .featured .plan-desc { color: rgba(255,255,255,0.55); }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+  .plan-features li { font-size: 14px; display: flex; align-items: center; gap: 10px; }
+  .check { width: 16px; height: 16px; color: var(--teal); flex-shrink: 0; }
+  .featured .plan-features li { color: rgba(255,255,255,0.85); }
+  .btn-plan {
+    display: block; text-align: center; text-decoration: none;
+    padding: 13px; border-radius: 10px;
+    font-size: 14px; font-weight: 600;
+    border: 1.5px solid var(--border-strong);
+    color: var(--text);
+    transition: all .2s;
+  }
+  .btn-plan:hover { background: var(--surface); border-color: var(--accent); color: var(--accent); }
+  .btn-plan.btn-plan-primary {
+    background: var(--accent); color: #fff; border-color: transparent;
+  }
+  .btn-plan.btn-plan-primary:hover { background: #1a56d4; }
+  .btn-plan.btn-plan-ghost {
+    border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.85);
+    background: transparent;
+  }
+  .btn-plan.btn-plan-ghost:hover { background: rgba(255,255,255,0.1); }
+
+  /* SOCIAL PROOF */
+  .proof { background: var(--navy); color: #fff; }
+  .stats-row {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border-radius: var(--radius-lg);
+    overflow: hidden; margin-bottom: 64px;
+  }
+  .stat-cell {
+    background: rgba(255,255,255,0.04);
+    padding: 36px 24px; text-align: center;
+  }
+  .stat-num {
+    font-size: 44px; font-weight: 600; letter-spacing: -0.03em;
+    color: var(--teal); line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,0.5); }
+  .reviews-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .review-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+  }
+  .review-stars { color: var(--amber); font-size: 16px; margin-bottom: 14px; }
+  .review-card blockquote {
+    font-size: 14px; line-height: 1.65;
+    color: rgba(255,255,255,0.75);
+    font-style: italic;
+    margin-bottom: 20px;
+    border: none; padding: 0;
+  }
+  .reviewer { font-size: 13px; color: rgba(255,255,255,0.45); }
+  .ratings-row {
+    display: flex; align-items: center; justify-content: center; gap: 32px;
+    margin-top: 48px; flex-wrap: wrap;
+  }
+  .rating-pill {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 100px; padding: 10px 20px;
+  }
+  .rating-pill strong { font-size: 16px; font-weight: 600; }
+  .rating-pill span { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+  /* FAQ */
+  .faq { background: var(--surface); }
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+  .faq-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 24px;
+    transition: border-color .2s;
+  }
+  .faq-card:hover { border-color: var(--accent); }
+  .faq-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; color: var(--text); }
+  .faq-card p { font-size: 14px; color: var(--text-2); line-height: 1.65; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.45);
+    text-align: center; padding: 32px 5%;
+    font-size: 13px;
+  }
+  footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
+  footer a:hover { color: #fff; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-inner, .demo-inner { grid-template-columns: 1fr; }
+    .hero-image-wrap { display: none; }
+    .cap-grid, .industry-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .reviews-row { grid-template-columns: 1fr; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+  /* AD360 STYLE CAPABILITIES */
+  .capabilities-section { padding: 100px 5%; background: #fff; }
+  .cap-header { text-align: center; margin-bottom: 60px; }
+  .cap-header h2 { font-size: 36px; font-weight: 600; color: var(--navy); margin-bottom: 15px; }
+  
+  .cap-container { max-width: 1200px; margin: 0 auto; display: flex; background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.06); min-height: 600px; }
+  .cap-sidebar { width: 360px; background: #f8f9fc; border-right: 1px solid var(--border); }
+  .cap-tab-btn { width: 100%; padding: 20px 25px; border: none; background: none; display: flex; align-items: center; gap: 15px; cursor: pointer; text-align: left; transition: 0.2s; border-bottom: 1px solid rgba(0,0,0,0.03); }
+  .cap-tab-btn .icon { width: 32px; height: 32px; border-radius: 6px; background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); color: var(--text-3); }
+  .cap-tab-btn span { font-size: 14px; font-weight: 600; color: var(--text-2); line-height: 1.3; }
+  .cap-tab-btn.active { background: #fff; border-left: 4px solid var(--accent); }
+  .cap-tab-btn.active .icon { background: var(--accent); color: #fff; }
+  .cap-tab-btn.active span { color: var(--accent); }
+
+  .cap-content-area { flex: 1; padding: 60px; background: #fff; position: relative; }
+  .cap-pane { display: none; animation: fadeIn 0.4s ease; }
+  .cap-pane.active { display: block; }
+  .cap-pane h3 { font-size: 26px; margin-bottom: 15px; color: var(--navy); }
+  .cap-pane p { font-size: 16px; color: var(--text-2); margin-bottom: 24px; line-height: 1.6; }
+  .learn-more { color: var(--accent); text-decoration: none; font-weight: 600; display: inline-block; margin-bottom: 30px; }
+  .learn-more:hover { text-decoration: underline; }
+
+  /* DASHBOARD UI SIMULATION (MOCK GIFS) */
+  .dashboard-mock { background: #f0f2f5; border-radius: 12px; border: 1px solid #d1d9e4; overflow: hidden; height: 260px; position: relative; font-family: 'DM Mono', monospace; }
+  .mock-header { background: #fff; padding: 10px 15px; border-bottom: 1px solid #d1d9e4; display: flex; gap: 8px; align-items: center; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #ff5f56; }
+  .mock-body { padding: 20px; font-size: 11px; }
+  .ui-row { background: #fff; border: 1px solid #e1e4e8; padding: 10px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; animation: slideIn 0.5s ease-out; }
+  .status-pill { padding: 3px 8px; border-radius: 4px; font-size: 9px; font-weight: 700; }
+  .status-allowed { background: #e6fcf5; color: #087f5b; }
+  .status-blocked { background: #fff5f5; color: #c92a2a; }
+
+  @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .pricing-wrapper {
+    max-width: 1200px;
+    margin: 60px auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Comparison box is wider */
+    gap: 32px;
+    align-items: stretch;
   }
 
-  .hero small{
-    text-align:center;
-  }
-
-  .hero-visual{
-    justify-content:center;
-  }
-
-  .hero-ui-frame{
-    max-width:840px;
-  }
-}
-
-@media (max-width:820px){
-  .hero{
-    padding:42px 0 18px;
-  }
-
-  .hero-title-main{
-    font-size:38px;
-  }
-}
-
-@media (max-width:480px){
-  .hero-title-main{
-    font-size:32px;
-  }
-
-  .btn{
-    min-width:240px;
-  }
-
-  .hero-ui-frame{
-    padding:8px;
-    border-radius:18px;
-  }
-
-  .hero-ui-frame img{
-    border-radius:12px;
-  }
-
-  .hero-bridge{
-    height:78px;
-  }
-}
-
-/* =========================================================
-TRUST STRIP
-========================================================= */
-.trust-logos-strip{
-  position:relative;
-  padding:8px 0 42px;
-  margin-top:-1px;
-  background:
-    radial-gradient(1100px 520px at 18% 0%, rgba(25,169,116,0.035), transparent 62%),
-    radial-gradient(1100px 520px at 82% 0%, rgba(11,61,46,0.025), transparent 62%),
-    linear-gradient(180deg,
-      var(--hero-trust) 0%,
-      var(--hero-trust-2) 54%,
-      var(--wash-3) 100%
-    );
-}
-
-.trust-logos-strip::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-  background:
-    radial-gradient(circle at 1px 1px, rgba(15,23,42,0.014) 1px, transparent 1.8px)
-    0 0 / 16px 16px;
-  -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.12) 55%, rgba(0,0,0,0.20) 100%);
-  mask-image:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.12) 55%, rgba(0,0,0,0.20) 100%);
-}
-
-.trust-logos-strip::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  top:-60px;
-  height:60px;
-  pointer-events:none;
-  z-index:0;
-  background:linear-gradient(180deg, rgba(238,245,242,0) 0%, var(--hero-trust) 100%);
-}
-
-.trust-logos-strip .container{
-  position:relative;
-  z-index:1;
-}
-
-.trust-head{
-  text-align:center;
-  margin-bottom:18px;
-}
-
-.trust-kicker{
-  font-size:13px;
-  font-weight:900;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  color:#334155;
-}
-
-.trust-logos-marquee{
-  position:relative;
-  width:100vw;
-  margin-left:calc(50% - 50vw);
-  margin-right:calc(50% - 50vw);
-  overflow:hidden;
-  margin-top:10px;
-  padding:0;
-}
-
-.trust-logos-marquee::before,
-.trust-logos-marquee::after{
-  content:"";
-  position:absolute;
-  top:0;
-  width:110px;
-  height:100%;
-  z-index:2;
-  pointer-events:none;
-}
-
-.trust-logos-marquee::before{
-  left:0;
-  background:linear-gradient(to right, var(--hero-trust), transparent);
-}
-
-.trust-logos-marquee::after{
-  right:0;
-  background:linear-gradient(to left, var(--hero-trust), transparent);
-}
-
-.trust-logos-track{
-  display:flex;
-  width:max-content;
-  align-items:center;
-  animation:trust-logo-scroll 22s linear infinite;
-  will-change:transform;
-}
-
-.trust-logos-set{
-  display:flex;
-  align-items:center;
-  gap:22px;
-  flex:0 0 auto;
-  padding-right:22px;
-}
-
-.logo-tile{
-  height:76px;
-  min-width:170px;
-  padding:14px 18px;
-  border-radius:18px;
-  background:rgba(255,255,255,0.96);
-  border:1px solid rgba(15,23,42,0.05);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.logo-tile img{
-  max-height:34px;
-  max-width:100%;
-  object-fit:contain;
-  opacity:0.95;
-  filter:saturate(0.98);
-}
-
-@keyframes trust-logo-scroll{
-  from{ transform:translateX(0); }
-  to{ transform:translateX(-50%); }
-}
-
-@media (max-width:1024px){
-  .trust-logos-track{ animation-duration:18s; }
-  .logo-tile{ min-width:170px; }
-}
-
-@media (max-width:640px){
-  .trust-logos-track{ animation-duration:15s; }
-  .trust-logos-set{ gap:14px; padding-right:14px; }
-  .trust-logos-strip{ padding:4px 0 34px; }
-  .logo-tile{
-    height:70px;
-    min-width:148px;
-    border-radius:16px;
-  }
-}
-
-/* ======================================================================
-CAROUSEL
-====================================================================== */
-.carousel{
-  position:relative;
-  padding:72px 0 84px;
-  overflow:hidden;
-  background:
-    radial-gradient(900px 520px at 22% 18%, rgba(25,169,116,0.22), transparent 62%),
-    radial-gradient(900px 560px at 78% 12%, rgba(11,61,46,0.28), transparent 60%),
-    linear-gradient(180deg, #061a33 0%, #0b1220 70%, #081a2e 100%);
-}
-
-.carousel::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 1.8px) 0 0 / 18px 18px;
-  opacity:0.35;
-  mask-image:linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0) 100%);
-}
-
-.carousel-shell{
-  max-width:var(--container);
-  margin:0 auto;
-  padding:0 var(--pad-x);
-  position:relative;
-  z-index:1;
-}
-
-.carousel-viewport{
-  max-width:1240px;
-  margin:0 auto;
-  position:relative;
-  background:transparent;
-  border:none;
-  box-shadow:none;
-  padding:0;
-}
-
-.carousel-track{
-  width:100%;
-  position:relative;
-  min-height:540px;
-  padding-top:6px;
-}
-
-.carousel-item{
-  display:none;
-  flex-direction:column;
-  align-items:center;
-}
-
-.carousel-item.active{
-  display:flex;
-  animation:fadeUp 280ms ease both;
-}
-
-@keyframes fadeUp{
-  from{ opacity:0; transform:translateY(10px); }
-  to{ opacity:1; transform:translateY(0); }
-}
-
-.carousel-caption{
-  width:100%;
-  max-width:980px;
-  margin:0 auto 18px;
-  padding:0 6px;
-  text-align:left;
-}
-
-.carousel-caption strong{
-  font-size:38px;
-  font-weight:900;
-  letter-spacing:-0.035em;
-  color:rgba(236,253,245,0.95);
-}
-
-.carousel-caption p{
-  margin-top:10px;
-  font-size:16px;
-  color:rgba(226,232,240,0.78);
-  line-height:1.7;
-}
-
-.carousel-btn{
-  position:absolute;
-  top:28px;
-  width:46px;
-  height:46px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,0.16);
-  background:rgba(255,255,255,0.08);
-  color:rgba(226,232,240,0.95);
-  cursor:pointer;
-  box-shadow:0 16px 36px rgba(0,0,0,0.30);
-  transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
-  z-index:10;
-}
-
-.carousel-btn.prev{ right:calc(var(--pad-x) + 66px); }
-.carousel-btn.next{ right:var(--pad-x); }
-
-.carousel-btn:hover{
-  transform:translateY(-1px);
-  border-color:rgba(25,169,116,0.38);
-  background:rgba(25,169,116,0.14);
-  box-shadow:0 22px 50px rgba(0,0,0,0.36);
-}
-
-.carousel-nav{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:12px;
-  margin:22px 0 0;
-  padding:0 10px;
-}
-
-.carousel-dot{
-  padding:10px 18px;
-  border-radius:999px;
-  background:rgba(255,255,255,0.18);
-  border:1px solid rgba(255,255,255,0.32);
-  color:rgba(226,232,240,0.95);
-  font-size:13px;
-  font-weight:900;
-  letter-spacing:-0.01em;
-  cursor:pointer;
-  box-shadow:
-    0 10px 26px rgba(0,0,0,0.35),
-    inset 0 1px 0 rgba(255,255,255,0.25);
-  backdrop-filter:blur(10px);
-  transition:transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease;
-}
-
-.carousel-dot:hover{
-  transform:translateY(-1px);
-  background:rgba(255,255,255,0.26);
-  border-color:rgba(25,169,116,0.42);
-  box-shadow:
-    0 16px 38px rgba(0,0,0,0.42),
-    inset 0 1px 0 rgba(255,255,255,0.35);
-}
-
-.carousel-dot.active{
-  background:linear-gradient(135deg, var(--ent-2), var(--ent-3));
-  border-color:rgba(25,169,116,0.42);
-  color:#fff;
-  box-shadow:0 18px 44px rgba(25,169,116,0.18);
-}
-
-.carousel-dot .pill{
-  width:9px;
-  height:9px;
-  border-radius:999px;
-  background:rgba(226,232,240,0.90);
-  display:inline-block;
-  margin-right:8px;
-  vertical-align:middle;
-  box-shadow:0 0 0 2px rgba(0,0,0,0.25);
-}
-
-.carousel-dot.active .pill{
-  background:rgba(255,255,255,0.98);
-  box-shadow:0 0 0 2px rgba(255,255,255,0.20);
-}
-
-.carousel-media{
-  width:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.carousel-media img{
-  max-width:720px;
-  width:100%;
-  height:420px;
-  object-fit:contain;
-  border-radius:18px;
-  box-shadow:0 18px 38px rgba(0,0,0,0.35);
-  background:rgba(255,255,255,0.02);
-}
-
-.carousel-media video{
-  max-width:720px;
-  width:100%;
-  border-radius:18px;
-  box-shadow:0 18px 38px rgba(0,0,0,0.40);
-  display:block;
-}
-
-@media (max-width:900px){
-  .carousel-btn{ display:none; }
-  .carousel-media video{ height:320px; object-fit:cover; }
-  .carousel-track{ min-height:420px; }
-  .carousel-caption strong{ font-size:30px; }
-  .carousel-media img{ height:320px; }
-}
-
-/* ---------- FEATURES ---------- */
-.features{
-  padding:var(--section-y) 0;
-  background:var(--bg-light);
-  text-align:center;
-}
-
-.feature-heading{
-  font-size:32px;
-  line-height:1.35;
-  max-width:1040px;
-  margin:0 auto 44px;
-  font-weight:700;
-  letter-spacing:-0.02em;
-  color:#0b1220;
-  padding:0 var(--pad-x);
-}
-
-.feature-heading .highlight{
-  color:var(--blue);
-  font-weight:900;
-}
-
-.feature-grid{
-  max-width:var(--container);
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
-  gap:24px;
-  padding:0 var(--pad-x);
-}
-
-.card{
-  background:#fff;
-  padding:26px;
-  border-radius:var(--radius);
-  box-shadow:var(--shadow-md);
-  text-align:left;
-  transition:box-shadow .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease;
-  border:2px solid transparent;
-}
-
-.card:hover{
-  background-color:rgba(246,251,249,0.95);
-  box-shadow:0 28px 60px rgba(25,169,116,0.18);
-  border-color:var(--blue-2);
-  transform:translateY(-2px);
-}
-
-.card h3{
-  margin-bottom:12px;
-  font-size:22px;
-  font-weight:900;
-  letter-spacing:-0.01em;
-}
-
-.card p{
-  margin-bottom:18px;
-  color:var(--muted);
-  font-size:16px;
-}
-
-.feature-list{
-  list-style:none;
-}
-
-.feature-list li{
-  margin-bottom:16px;
-  position:relative;
-  padding-left:24px;
-}
-
-.feature-list li::before{
-  content:"✓";
-  position:absolute;
-  left:0;
-  top:0;
-  color:var(--blue-2);
-  font-weight:900;
-}
-
-.feature-list strong{
-  display:block;
-  font-weight:800;
-  color:var(--dark);
-}
-
-.feature-list span{
-  display:block;
-  margin-top:6px;
-  max-height:0;
-  overflow:hidden;
-  opacity:0;
-  font-size:14px;
-  color:var(--muted);
-  transition:max-height .35s ease, opacity .25s ease;
-}
-
-.card:hover .feature-list span{
-  max-height:120px;
-  opacity:1;
-}
-
-.feature-list a{
-  text-decoration:none;
-}
-
-.feature-list a:hover{
-  color:var(--blue-2);
-  text-decoration:underline;
-}
-
-/* ---------- WORKFLOW ---------- */
-.flow-as-flip{
-  padding:var(--section-y) 24px;
-  background:linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-  text-align:center;
-}
-
-.flow-as-flip .features-container{
-  max-width:var(--container);
-  margin:0 auto;
-}
-
-.flow-as-flip .features-intro{
-  max-width:980px;
-  margin:0 auto 36px;
-  padding:0 24px;
-}
-
-.flow-as-flip .features-intro h2{
-  font-size:30px;
-  line-height:1.3;
-  font-weight:900;
-  letter-spacing:-0.02em;
-  color:#0f172a;
-}
-
-.flow-as-flip .features-intro p{
-  max-width:780px;
-  margin:10px auto 0;
-  font-size:16px;
-  color:var(--muted);
-}
-
-@media (min-width:900px){
-  .flow-as-flip .features-grid{
-    position:relative;
-    display:grid;
-    grid-template-columns:repeat(3, 220px);
-    justify-content:center;
-    gap:28px;
-    padding:12px 0 0;
-  }
-}
-
-@media (max-width:899px){
-  .flow-as-flip .features-grid{
-    position:relative;
-    display:grid;
-    grid-auto-flow:column;
-    grid-auto-columns:220px;
-    gap:16px;
-    overflow-x:auto;
-    padding:6px 6px 12px;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-    justify-content:start;
-  }
-}
-
-.flow-as-flip .features-grid::before{
-  content:"";
-  position:absolute;
-  left:8%;
-  right:8%;
-  top:50%;
-  height:1px;
-  transform:translateY(-50%);
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(25,169,116,0.18),
-    rgba(11,61,46,0.35),
-    transparent
-  );
-  opacity:0.6;
-  pointer-events:none;
-}
-
-.flow-as-flip .feature-card{
-  display:block;
-  width:220px;
-  height:160px;
-  scroll-snap-align:start;
-  position:relative;
-  border-radius:18px;
-  background:#ffffff;
-  border:1px solid #e5e7eb;
-  box-shadow:0 10px 28px rgba(15,23,42,0.06);
-  overflow:hidden;
-  text-decoration:none;
-  transition:transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.flow-as-flip .feature-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(800px 260px at 20% 18%, rgba(255,255,255,0.20), transparent 60%),
-    linear-gradient(135deg, var(--ent-1) 0%, var(--ent-2) 55%, var(--ent-3) 100%);
-  opacity:0;
-  transition:opacity 0.25s ease;
-}
-
-.flow-as-flip .feature-front,
-.flow-as-flip .feature-back{
-  position:absolute;
-  inset:0;
-  padding:22px 18px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  transition:opacity 0.25s ease, transform 0.25s ease;
-}
-
-.flow-as-flip .feature-front h3{
-  margin:0;
-  font-size:16px;
-  font-weight:900;
-  color:var(--blue-2);
-}
-
-.flow-as-flip .feature-back{
-  opacity:0;
-  transform:translateY(16px);
-  color:#eef5f2;
-}
-
-.flow-as-flip .feature-back p{
-  margin:0;
-  font-size:13.5px;
-  line-height:1.55;
-  max-width:28ch;
-}
-
-.flow-as-flip .feature-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 26px 60px rgba(15,23,42,0.16);
-}
-
-.flow-as-flip .feature-card:hover::before{ opacity:1; }
-.flow-as-flip .feature-card:hover .feature-front{ opacity:0; transform:translateY(-6px); }
-.flow-as-flip .feature-card:hover .feature-back{ opacity:1; transform:translateY(0); }
-.flow-as-flip .feature-card:hover .feature-front h3{ color:#eef5f2; }
-
-.outcomes-cta{
-  margin:28px auto 0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:16px;
-  padding:18px 20px;
-  border-radius:18px;
-  background:#eef5f2;
-  backdrop-filter:blur(10px);
-  border:1px solid rgba(25,169,116,0.18);
-  box-shadow:0 16px 44px rgba(15,23,42,0.08);
-  max-width:950px;
-}
-
-.outcomes-cta p{
-  margin:0;
-  font-size:15px;
-  color:#475569;
-  max-width:540px;
-}
-
-.outcomes-link{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  font-weight:800;
-  color:var(--blue-2);
-  text-decoration:none;
-  padding:10px 14px;
-  border-radius:999px;
-  border:1px solid rgba(25,169,116,0.24);
-  background:rgba(25,169,116,0.08);
-  box-shadow:0 10px 22px rgba(15,23,42,0.06);
-  transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-  white-space:nowrap;
-}
-
-.outcomes-link:hover{
-  transform:translateY(-2px);
-  border-color:rgba(25,169,116,0.38);
-  background:rgba(25,169,116,0.14);
-  box-shadow:0 16px 30px rgba(15,23,42,0.10);
-}
-
-@media (max-width:720px){
-  .outcomes-cta{
-    flex-direction:column;
-    text-align:center;
-  }
-
-  .outcomes-link{
-    width:100%;
-    justify-content:center;
-  }
-}
-
-/* ---------- METRICS BAND ---------- */
-.trust-metrics-band{
-  padding:62px 0;
-  background:linear-gradient(180deg,#ffffff 0%, #f8fafc 55%, #ffffff 100%);
-  text-align:center;
-}
-
-.trust-metrics{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  text-align:center;
-}
-
-.metric{
-  padding:16px 12px;
-}
-
-.metric strong{
-  display:inline-block;
-  font-weight:900;
-  font-size:clamp(34px, 3.2vw, 44px);
-  letter-spacing:-0.05em;
-  background:linear-gradient(180deg, #0b1220, var(--blue-2));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  transition:transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), text-shadow 0.32s ease;
-}
-
-.metric span{
-  display:block;
-  margin-top:10px;
-  font-size:14px;
-  color:#64748b;
-}
-
-.metric:hover strong{
-  transform:scale(1.18);
-  text-shadow:0 18px 36px rgba(25,169,116,0.18);
-}
-
-@media (max-width:1024px){
-  .trust-metrics{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media (max-width:640px){
-  .trust-metrics{
-    grid-template-columns:1fr;
-  }
-}
-
-/* ---------- PRICING ---------- */
-.pricing-compare{
-  padding: calc(var(--section-y) - 12px) 0;
-  background:
-    radial-gradient(900px 380px at 25% 0%, rgba(25,169,116,0.10), transparent 60%),
-    linear-gradient(180deg, #f6fbf9 0%, #ffffff 65%);
-}
-
-.pricing-wrap{
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 var(--pad-x);
-  text-align: center;
-}
-
-.pricing-title{
-  font-size: 36px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: #0b1220;
-  margin-bottom: 10px;
-}
-
-.pricing-sub{
-  max-width: 860px;
-  margin: 0 auto 34px;
-  font-size: 16px;
-  color: var(--muted-2);
-  line-height: 1.7;
-}
-
-.pricing-grid{
-  display: grid;
-  grid-template-columns: 2fr 1.15fr;
-  gap: 24px;
-  align-items: stretch;
-}
-
-/* restore original card feel */
-.compare-card{
-  background: rgba(255,255,255,0.92);
-  border: 1px solid rgba(15,23,42,0.08);
-  border-radius: 22px;
-  box-shadow: 0 18px 48px rgba(15,23,42,0.10);
-  overflow: hidden;
-  position: relative;
-  padding: 18px;
-  text-align: left;
-}
-
-.compare-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(900px 360px at 30% 15%, rgba(25,169,116,0.10), transparent 60%),
-    radial-gradient(900px 360px at 70% 10%, rgba(11,61,46,0.06), transparent 65%);
-  pointer-events:none;
-}
-
-.compare-card.pill-mode{
-  padding: 18px;
-}
-
-/* pills */
-.plan-pills{
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  margin: 8px auto 16px;
-}
-
-.pills-shell{
-  display: inline-flex;
-  gap: 8px;
-  padding: 6px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.78);
-  border: 1px solid rgba(15,23,42,0.08);
-  box-shadow: 0 10px 26px rgba(15,23,42,0.08);
-  backdrop-filter: blur(10px);
-}
-
-.pill-btn{
-  appearance: none;
-  border: 1px solid transparent;
-  background: transparent;
-  padding: 10px 14px;
-  border-radius: 999px;
-  font-weight: 900;
-  font-size: 13px;
-  letter-spacing: -0.01em;
-  color: #0f172a;
-  cursor: pointer;
-  transition: background .18s ease, color .18s ease, box-shadow .18s ease, border-color .18s ease, transform .18s ease;
-}
-
-.pill-btn:hover{
-  transform: translateY(-1px);
-  border-color: rgba(25,169,116,0.24);
-  background: rgba(25,169,116,0.08);
-}
-
-.pill-btn[aria-selected="true"]{
-  color: #ffffff;
-  background: linear-gradient(135deg, var(--ent-1), var(--ent-2), var(--ent-3));
-  box-shadow: 0 16px 40px rgba(11,61,46,0.18);
-  border-color: rgba(255,255,255,0.14);
-}
-
-/* main plan panel */
-.plan-panel{
-  position: relative;
-  z-index: 2;
-  padding: 10px 10px 6px;
-}
-
-.plan-col{
-  padding: 20px 22px 20px;
-  background: rgba(255,255,255,0.90);
-  border: 1px solid rgba(15,23,42,0.08);
-  border-radius: 18px;
-  box-shadow: 0 16px 38px rgba(15,23,42,0.08);
-}
-
-.plan-meta{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap: 12px;
-}
-
-.plan-col h3{
-  font-size: 22px;
-  line-height: 1.15;
-  color: #0b1220;
-  font-weight: 900;
-  margin: 0;
-  text-align: left;
-}
-
-.plan-detail{
-  margin-top: 8px;
-  font-size: 14px;
-  color: var(--muted-2);
-  text-align:left;
-}
-
-.plan-badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-width:54px;
-  height:34px;
-  padding:0 12px;
-  border-radius:999px;
-  background: rgba(25,169,116,0.10);
-  border: 1px solid rgba(25,169,116,0.18);
-  color: var(--ent-2);
-  font-size: 14px;
-  font-weight: 900;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.plan-price{
-  margin-top: 18px;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:8px;
-}
-
-.plan-kicker{
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  color: #64748b;
-}
-
-.plan-amount-row{
-  display:flex;
-  align-items:flex-end;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.plan-price .amt{
-  font-size: 44px;
-  line-height: 0.95;
-  font-weight: 900;
-  letter-spacing: -0.05em;
-  color: #0b1220;
-}
-
-.plan-price .unit{
-  font-size: 14px;
-  color: var(--muted-2);
-  padding-bottom: 5px;
-}
-
-.plan-divider{
-  height: 1px;
-  background: rgba(11,61,46,0.14);
-  margin: 18px 0 16px;
-}
-
-.plan-list{
-  list-style:none;
-  padding:0;
-  margin:0;
-  display:grid;
-  gap:12px;
-}
-
-.plan-list li{
-  position: relative;
-  padding-left: 22px;
-  color: #0f172a;
-  font-size: 14.5px;
-  line-height: 1.55;
-}
-
-.plan-list li::before{
-  content: "✓";
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-weight: 900;
-  color: var(--blue-2);
-}
-
-.plan-cta-row{
-  margin-top: 18px;
-  display:flex;
-  justify-content:flex-start;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.plan-btn{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-weight: 900;
-  text-decoration: none;
-  border: 2px solid transparent;
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
-  min-width: 180px;
-}
-
-.plan-btn.outline{
-  background: rgba(255,255,255,0.90);
-  color: #0b1220;
-  border-color: rgba(25,169,116,0.25);
-  box-shadow: 0 12px 26px rgba(15,23,42,0.08);
-}
-
-.plan-btn.outline:hover{
-  transform: translateY(-1px);
-  border-color: rgba(25,169,116,0.36);
-  background: rgba(25,169,116,0.05);
-}
-
-.plan-btn.solid{
-  background: linear-gradient(135deg, var(--ent-1), var(--ent-2), var(--ent-3));
-  color: #fff;
-  box-shadow: 0 16px 40px rgba(11,61,46,0.18);
-}
-
-.plan-btn.solid:hover{
-  transform: translateY(-1px);
-  filter: brightness(1.02);
-}
-
-.pricing-footnote{
-  margin-top: 14px;
-  font-size: 11.5px;
-  line-height: 1.45;
-  color: rgba(15,23,42,0.55);
-  text-align: center;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-
-.pricing-footnote a{
-  color: rgba(11,61,46,0.90);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(11,61,46,0.35);
-}
-
-.pricing-footnote a:hover{
-  border-bottom-color: rgba(11,61,46,0.65);
-}
-
-/* right pitch card */
-.pitch-card{
-  background: linear-gradient(180deg, #eef8f2 0%, #e1f1e8 100%);
-  border: 1px solid #9ec9b4;
-  border-radius: 22px;
-  box-shadow: 0 22px 56px rgba(11,61,46,0.14);
-  padding: 28px 26px;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 18px;
-  position: relative;
-  overflow: hidden;
-}
-
-.pitch-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(900px 380px at 20% 10%, rgba(45,186,138,0.20), transparent 60%),
-    radial-gradient(900px 380px at 80% 30%, rgba(11,61,46,0.12), transparent 65%);
-  pointer-events:none;
-}
-
-.pitch-top,
-.pitch-bottom{
-  position: relative;
-  z-index: 1;
-}
-
-.pitch-kicker{
-  margin: 0 0 6px;
-  font-size: 16px;
-  color: #0b1220;
-  font-weight: 500;
-}
-
-.pitch-title{
-  margin: 0 0 12px;
-  font-size: 22px;
-  font-weight: 900;
-  color: #0b1220;
-}
-
-.pitch-divider{
-  height: 1px;
-  background: rgba(11,61,46,0.22);
-  margin: 10px 0 18px;
-}
-
-.pitch-plus{
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.pitch-plus .plus{
-  font-size: 28px;
-  line-height: 1;
-  font-weight: 900;
-  color: var(--ent-2);
-  margin-top: 2px;
-}
-
-.pitch-plus .plus-text{
-  font-size: 18px;
-  font-weight: 900;
-  color: #0b1220;
-}
-
-.pitch-list{
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 12px;
-}
-
-.pitch-list li{
-  position: relative;
-  padding-left: 28px;
-  font-size: 14px;
-  color: #0f172a;
-  line-height: 1.55;
-}
-
-.pitch-list li::before{
-  content:"✓";
-  position:absolute;
-  left: 0;
-  top: 0;
-  font-weight: 900;
-  color: var(--ent-2);
-}
-
-.pitch-bottom{
-  display: flex;
-  justify-content: center;
-}
-
-.pitch-btn{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 13px 22px;
-  border-radius: 14px;
-  font-weight: 900;
-  text-decoration: none;
-  min-width: 220px;
-  color: #ffffff;
-  background: linear-gradient(135deg, var(--ent-1), var(--ent-2), var(--ent-3));
-  box-shadow: 0 22px 60px rgba(11,61,46,0.22);
-  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-}
-
-.pitch-btn:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 22px 56px rgba(11,61,46,0.20);
-  filter: brightness(1.02);
-}
-
-@media (max-width: 1024px){
-  .pricing-grid{
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 820px){
-  .compare-card,
-  .compare-card.pill-mode{
-    padding: 14px;
-  }
-
-  .plan-panel{
-    padding: 8px 0 0;
-  }
-
-  .plan-col{
-    padding: 18px 16px;
-  }
-
-  .plan-meta{
+  /* Comparison Box Styling */
+  .comparison-box {
+    background: #fff;
+    border: 1px solid #e1e4e8;
+    border-radius: 24px;
+    padding: 40px;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
   }
 
-  .plan-badge{
-    margin-top: 10px;
+  .comparison-header {
+    display: flex;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #f0f0f0;
   }
 
-  .plan-cta-row{
-    justify-content: center;
+  .comp-column {
+    flex: 1;
+    padding: 0 20px;
   }
 
-  .pitch-card{
-    padding: 24px 22px;
+  .comp-column:first-child {
+    border-right: 1px solid #f0f0f0;
   }
 
-  .plan-btn,
-  .pitch-btn{
-    width: 100%;
-    min-width: 0;
+  .tier-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: #f0f4ff;
+    color: #2d6ef5;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 16px;
   }
+
+  .comp-price {
+    font-size: 42px;
+    font-weight: 700;
+    color: #0a1628;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .comp-price small {
+    font-size: 14px;
+    font-weight: 500;
+    color: #7a90b0;
+  }
+
+  .comp-features {
+    list-style: none;
+    margin-bottom: 40px;
+    flex-grow: 1;
+  }
+
+  .comp-features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: #3d5275;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .comp-features li svg, .check-svg {
+    color: #2d6ef5;
+    flex-shrink: 0;
+  }
+
+  .comp-actions {
+    display: flex;
+    gap: 16px;
+  }
+
+  /* Endpoint Central Card Styling */
+  .pricing-card-suite {
+    background: #f8f9fc;
+    border: 1px solid #e1e4e8;
+    border-radius: 24px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+  }
+
+  .pricing-card-suite:hover {
+    transform: translateY(-5px);
+    border-color: #2d6ef5;
+  }
+
+  .suite-name {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #7a90b0;
+    margin-bottom: 16px;
+  }
+
+  .suite-price {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .suite-desc {
+    font-size: 14px;
+    color: #7a90b0;
+    margin-bottom: 32px;
+  }
+
+  /* Shared Button Styles */
+  .btn-comp {
+    flex: 1;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.2s;
+  }
+
+  .btn-free { background: #fff; color: #2d6ef5; border: 2px solid #2d6ef5; }
+  .btn-quote { background: #ef233c; color: #fff; border: none; }
+  .btn-suite { background: #0a1628; color: #fff; margin-top: auto; }
+
+  @media (max-width: 992px) {
+    .pricing-wrapper { grid-template-columns: 1fr; }
+    .comparison-header { flex-direction: column; gap: 20px; }
+    .comp-column:first-child { border-right: none; border-bottom: 1px solid #f0f0f0; padding-bottom: 20px; }
+  }
+  .rating-logo {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
 }
 
-/* ---------- FAQ ---------- */
+.rating-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.rating-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 10px 18px;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease;
+}
+
+.rating-pill:hover {
+  transform: translateY(-2px);
+}
+
+.rating-logo {
+  height: 26px;
+}
+.rating-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.08); /* subtle light bg */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.rating-logo {
+  height: 26px;
+  background: #ffffff;   /* 👈 THIS fixes visibility */
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+/* PRICING SECTION - REFINED DESIGN */
+  .pricing-wrapper {
+    max-width: 1200px;
+    margin: 60px auto;
+    display: grid;
+    grid-template-columns: 1.8fr 1fr; 
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .comparison-box, .pricing-card-suite {
+    background: #ffffff;
+    border: 1px solid #e1e4e8;
+    border-radius: 24px;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  }
+
+  .pricing-card-suite {
+    background: #f8f9fc;
+  }
+
+  .comparison-header {
+    display: flex;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 30px;
+  }
+
+  .comp-column {
+    flex: 1;
+  }
+
+  .comp-column:first-child {
+    border-right: 1px solid #f0f0f0;
+    padding-right: 30px;
+  }
+
+  .comp-column:last-child {
+    padding-left: 30px;
+  }
+
+  .tier-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: #f0f4ff;
+    color: #2d6ef5;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .comp-price {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0a1628;
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .comp-price small {
+    font-size: 14px;
+    font-weight: 500;
+    color: #7a90b0;
+  }
+
+  .comp-features {
+    list-style: none;
+    margin-bottom: 60px;
+    flex-grow: 1;
+  }
+
+  .comp-features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: #3d5275;
+    margin-bottom: 18px;
+  }
+
+  .comp-features li svg {
+    color: #2d6ef5;
+    flex-shrink: 0;
+  }
+
+  /* BUTTONS */
+  .comp-actions {
+    display: flex;
+    gap: 16px;
+  }
+
+  .btn-comp {
+    flex: 1;
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.2s ease;
+  }
+
+  .btn-free {
+    background: #fff;
+    color: #2d6ef5;
+    border: 2px solid #2d6ef5;
+  }
+
+  .btn-free:hover {
+    background: #f0f4ff;
+  }
+
+  .btn-quote {
+    background: #ef233c; /* Red color from image */
+    color: #fff;
+    border: none;
+  }
+
+  .btn-quote:hover {
+    background: #d90429;
+  }
+
+  .btn-suite {
+    background: #0a1628;
+    color: #fff;
+    width: 100%;
+  }
+
+  /* SUITE CARD SPECIFICS */
+  .suite-name {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #7a90b0;
+    margin-bottom: 24px;
+    letter-spacing: 0.05em;
+  }
+
+  .suite-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0a1628;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .suite-desc {
+    font-size: 14px;
+    color: #7a90b0;
+    margin-bottom: 32px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 992px) {
+    .pricing-wrapper { grid-template-columns: 1fr; }
+    .comparison-header { flex-direction: column; gap: 40px; border-bottom: none; }
+    .comp-column:first-child { border-right: none; border-bottom: 1px solid #f0f0f0; padding-right: 0; padding-bottom: 30px; }
+    .comp-column:last-child { padding-left: 0; }
+  }
+  /* --- TIGHTENED GLOBAL SPACING --- */
+  section { 
+    padding: 40px 5%; /* Reduced from 96px */
+  }
+
+  .hero {
+    padding: 60px 5% 40px; /* Reduced from 90px */
+    background: linear-gradient(155deg, var(--navy) 0%, var(--navy-mid) 55%, #0d2050 100%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cap-content-area { 
+    flex: 1; 
+    padding: 30px 40px; /* Reduced from 60px */
+    background: #fff; 
+    position: relative; 
+  }
+
+  .cap-container { 
+    min-height: 500px; /* Slightly shorter */
+  }
+
+  /* --- TIGHTENED PRICING SECTION --- */
+  .pricing-wrapper {
+    max-width: 1200px;
+    margin: 20px auto; /* Reduced from 60px */
+    display: grid;
+    grid-template-columns: 1.8fr 1fr; 
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .comparison-box, .pricing-card-suite {
+    padding: 32px; /* Reduced from 48px */
+    border-radius: 16px; /* Slightly tighter corners */
+  }
+
+  .comparison-header {
+    margin-bottom: 20px; /* Reduced from 40px */
+    padding-bottom: 20px;
+  }
+
+  .tier-badge {
+    margin-bottom: 12px; /* Reduced from 24px */
+  }
+
+  .comp-features {
+    margin-bottom: 30px; /* Reduced from 60px */
+  }
+
+  .comp-features li {
+    margin-bottom: 10px; /* Tighter list spacing */
+  }
+
+  .suite-name {
+    margin-bottom: 12px; /* Reduced from 24px */
+  }
+
+  /* --- TIGHTENED SOCIAL PROOF --- */
+  .stats-row {
+    margin-bottom: 32px; /* Reduced from 64px */
+  }
+
+  .stat-cell {
+    padding: 24px; /* Reduced from 36px */
+  }
+
+  .ratings-row {
+    margin-top: 24px; /* Reduced from 48px */
+  }
+  /* ---------- FAQ ---------- */
 .faq-section{
   padding: var(--section-y) 0;
   background:
@@ -1697,422 +1022,573 @@ CAROUSEL
     font-size: 28px;
   }
 }
-
-/* ---------- FOOTER ---------- */
-footer{
-  padding:22px var(--pad-x);
-  text-align:center;
-  color:var(--muted);
-  border-top:1px solid var(--border);
-  font-size:14px;
-  background:#fff;
-}
-  
-</style> 
+</style>
 </head>
-
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="logo">
-      <img src="images/Device%20Control%20Plus_Black.png" alt="Device Control Plus logo">
-    </div>
-
-    <nav aria-label="Primary">
-      <a href="https://www.manageengine.com/device-control/features.html">Features</a>
-      <a href="https://www.manageengine.com/device-control/request-demo.html">Demo</a>
-      <a href="https://www.manageengine.com/device-control/help.html">Documents</a>
-      <a href="https://www.manageengine.com/device-control/get-quote.html">Get Quote</a>
-      <a href="https://www.manageengine.com/device-control/support.html">Support</a>
-    </nav>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="https://snehaa-p.github.io/dcp-landing-page/images/Device%20Control%20Plus_Black.png" alt="Device Control Plus">
+  </a>
+  <div class="nav-links">
+    <a href="https://www.manageengine.com/device-control/features.html">Features</a>
+    <a href="#demo">Request Demo</a>
+    <a href="https://www.manageengine.com/device-control/help.html">Docs</a>
+    <a href="https://www.manageengine.com/device-control/get-quote.html">Get Quote</a>
   </div>
-</header>
+  <a href="https://www.manageengine.com/device-control/download.html" class="nav-cta">Download</a>
+</nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="container hero-layout">
-    <div class="hero-content">
-      <h1>
-        <span class="hero-title-main">See, control and secure every device interaction</span>
-      </h1>
-
-      <div class="hero-buttons">
-        <div class="hero-cta">
-          <a href="https://www.manageengine.com/device-control/download.html" class="btn btn-primary">Download</a>
-          <span class="cta-note">On-premises</span>
-        </div>
-
-        <div class="hero-cta">
-          <a href="https://www.manageengine.com/products/desktop-central/cloud/" class="btn btn-primary">Sign up</a>
-          <span class="cta-note">Cloud via Endpoint Security Platform</span>
-        </div>
-      </div>
-
-      <small>30-day free trial · No credit card required · Free forever up to 25 endpoints</small>
-    </div>
-
-    <div class="hero-visual">
-      <div class="hero-ui-frame">
-        <img src="images/product-ui.png" alt="ManageEngine Device Control Plus console">
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="trust-logos-strip" aria-label="Trusted by leading brands worldwide">
-  <div class="container">
-    <div class="trust-head">
-      <p class="trust-kicker">Trusted by leading brands worldwide</p>
-    </div>
-
-    <div class="trust-logos-marquee" aria-label="Customer logos">
-      <div class="trust-logos-track">
-        <div class="trust-logos-set">
-          <div class="logo-tile"><img src="images/nhs-logo.svg" alt="NHS"></div>
-          <div class="logo-tile"><img src="images/kia-logo.svg" alt="Kia"></div>
-          <div class="logo-tile"><img src="images/sandisk-logo.svg" alt="SanDisk"></div>
-          <div class="logo-tile"><img src="images/fuji-logo.svg" alt="Fuji"></div>
-          <div class="logo-tile"><img src="images/doioig-logo.png" alt="Doioig"></div>
-          <div class="logo-tile"><img src="images/benelli-logo.svg" alt="Benelli"></div>
-          <div class="logo-tile"><img src="images/ineos-logo.svg" alt="Ineos"></div>
-          <div class="logo-tile"><img src="images/panasonic-logo.svg" alt="Panasonic"></div>
-          <div class="logo-tile"><img src="images/unisys-logo.svg" alt="Unisys"></div>
-          <div class="logo-tile"><img src="images/axa-logo.svg" alt="AXA"></div>
-          <div class="logo-tile"><img src="images/tokio-marine-logo.svg" alt="Tokio Marine"></div>
-          <div class="logo-tile"><img src="images/victoria-police-logo.svg" alt="Victoria Police"></div>
-        </div>
-
-        <div class="trust-logos-set" aria-hidden="true">
-          <div class="logo-tile"><img src="images/nhs-logo.svg" alt=""></div>
-          <div class="logo-tile"><img src="images/kia-logo.svg" alt=""></div>
-          <div class="logo-tile"><img src="images/sandisk-logo.svg" alt=""></div>
-          <div class="logo-tile"><img src="images/fuji-logo.svg" alt=""></div>
-          <div class="logo-tile"><img src="images/doioig-logo.png" alt=""></div>
-          <div class="logo-tile"><img src="images/benelli-logo.svg" alt=""></div>
-          <div class="logo-tile"><img src="images/ineos-logo.svg" alt=""></div>
-          <div class="logo-tile"><img src="images/panasonic-logo.svg" alt=""></div>
-          <div class="logo-tile"><img src="images/unisys-logo.svg" alt=""></div>
-          <div class="logo-tile"><img src="images/axa-logo.svg" alt=""></div>
-          <div class="logo-tile"><img src="images/tokio-marine-logo.svg" alt=""></div>
-          <div class="logo-tile"><img src="images/victoria-police-logo.svg" alt=""></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="carousel" aria-label="Product walkthrough" tabindex="0">
-  <div class="carousel-shell">
-    <button class="carousel-btn prev" aria-label="Previous slide">&#10094;</button>
-
-    <div class="carousel-viewport">
-      <div class="carousel-track">
-
-        <div class="carousel-item active" data-title="Time-bound access">
-          <div class="carousel-caption">
-            <strong>Grant just-in-time device access</strong>
-            <p>Allow temporary device access for specific users and tasks, then automatically revoke permissions.</p>
-          </div>
-
-          <div class="carousel-media">
-            <video autoplay muted loop playsinline>
-              <source src="videos/time-bound-access.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-
-        <div class="carousel-item" data-title="Encrypt USBs">
-          <div class="carousel-caption">
-            <strong>Enforce USB encryption policies</strong>
-            <p>Ensure sensitive data is written only to encrypted and compliant removable storage devices.</p>
-          </div>
-
-          <div class="carousel-media">
-            <video autoplay muted loop playsinline>
-              <source src="videos/encrypted-usb.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-
-        <div class="carousel-item" data-title="Transfer evidence">
-          <div class="carousel-caption">
-            <strong>Track and audit file transfers</strong>
-            <p>Capture copies of files moved to removable devices to support audits, investigations, and compliance.</p>
-          </div>
-
-          <div class="carousel-media">
-            <img src="images/file-shadowing.png" alt="File transfer evidence and visibility screenshot">
-          </div>
-        </div>
-
-        <div class="carousel-item" data-title="File permissions">
-          <div class="carousel-caption">
-            <strong>Control file access on USB devices</strong>
-            <p>Assign file system permissions like read-only access, allow file creation/modification on USB, or permit file movement from USB to a computer for trusted users.</p>
-          </div>
-
-          <div class="carousel-media">
-            <video autoplay muted loop playsinline>
-              <source src="videos/file-permissions.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-
-        <div class="carousel-item" data-title="Block peripherals">
-          <div class="carousel-caption">
-            <strong>Block unauthorized USB and peripherals</strong>
-            <p>Stop risky devices at the endpoint with centralized policies across teams and locations.</p>
-          </div>
-
-          <div class="carousel-media">
-            <video autoplay muted loop playsinline>
-              <source src="videos/block-peripherals.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="carousel-nav" aria-label="Choose a slide"></div>
-    </div>
-
-    <button class="carousel-btn next" aria-label="Next slide">&#10095;</button>
-  </div>
-</section>
-
-<section class="features" id="features">
-  <h2 class="feature-heading">
-    Control device access and file transfers to prevent <span class="highlight">data compromise </span> and
-    <span class="highlight">device-borne malware</span>.
-  </h2>
-
-  <div class="feature-grid">
-    <div class="card">
-      <h3>Enforce device usage policies</h3>
-      <p>Block unauthorized devices without impacting legitimate operations.</p>
-
-      <ul class="feature-list">
-        <li>
-          <strong><a href="https://www.manageengine.com/device-control/device-control.html">Block USB &amp; removable storage</a></strong>
-          <span>Prevent unauthorized USB drives and removable media using centralized, policy-driven controls across endpoints.</span>
-        </li>
-
-        <li>
-          <strong><a href="https://www.manageengine.com/device-control/file-tracing.html">Monitor and audit device activities</a></strong>
-          <span>Track device usage, file movements, and user actions to support security monitoring, investigations, and compliance reporting.</span>
-        </li>
-
-        <li>
-          <strong><a href="https://www.manageengine.com/device-control/temporary-access.html">Just-in-time device access</a></strong>
-          <span>Grant time-bound USB access for specific tasks and automatically revoke permissions.</span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>Enforce data protection policies</h3>
-      <p>Enforce encryption and capture evidence for audits, compliance, and investigations.</p>
-
-      <ul class="feature-list">
-        <li>
-          <strong><a href="https://www.manageengine.com/device-control/file-tracing.html">Audit file transfers with evidence</a></strong>
-          <span>Capture shadow copies of file transfers with timestamps, users, and device context for compliance and investigations.</span>
-        </li>
-
-        <li>
-          <strong><a href="https://www.manageengine.com/device-control/usb-encryption.html">Enforce USB encryption</a></strong>
-          <span>Ensure data is written only to encrypted and compliant USB devices to prevent data leakage.</span>
-        </li>
-
-        <li>
-          <strong><a href="https://www.manageengine.com/device-control/file-access-control.html">File-level access control</a></strong>
-          <span>Control read, write, and execute permissions by file type to protect sensitive data formats.</span>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="flow-as-flip" id="flow">
-  <div class="features-container">
-    <div class="features-intro">
-      <h2>Know what connects. Control what leaves.</h2>
-      <p>Start by discovering connected devices, then define policies and enforce controls across endpoints.</p>
-    </div>
-
-    <div class="flow-wrap">
-      <div class="features-grid" aria-label="Discover to enforce workflow">
-        <a class="feature-card" href="#" aria-label="Discover">
-          <div class="feature-front"><h3>Discover</h3></div>
-          <div class="feature-back"><p>Identify connected devices and classify them across the organization.</p></div>
+  <div class="hero-inner">
+    <div>
+      
+      <h1>Authorize, Authenticate, and <span>Audit Every Device</span></h1>
+      <p class="hero-sub">Prevent data theft and insider attacks with enterprise-grade device control. Monitor, block, and manage 15+ peripheral device types from a single console.</p>
+      <div class="hero-actions">
+        <a href="https://www.manageengine.com/device-control/download.html" class="btn-primary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Download
         </a>
-
-        <a class="feature-card" href="#" aria-label="Define">
-          <div class="feature-front"><h3>Define</h3></div>
-          <div class="feature-back"><p>Create granular device policies for users, groups, and endpoint types.</p></div>
-        </a>
-
-        <a class="feature-card" href="#" aria-label="Enforce">
-          <div class="feature-front"><h3>Enforce</h3></div>
-          <div class="feature-back"><p>Block unauthorized device actions while keeping workflows uninterrupted.</p></div>
+        <a href="https://www.manageengine.com/products/desktop-central/cloud/" class="btn-secondary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          Sign Up via Endpoint Central
         </a>
       </div>
+      <p class="hero-note">30-day free trial · No credit card required · Free forever up to 25 endpoints</p>
     </div>
-
-    <div class="outcomes-cta">
-      <p>Want to see device policies in action in your environment?</p>
-      <a href="https://www.manageengine.com/device-control/request-demo.html" class="outcomes-link">
-        Request a demo →
-      </a>
+    <div class="hero-image-wrap">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/product-ui.png" alt="Device Control Plus Console">
     </div>
   </div>
 </section>
 
-<section class="trust-metrics-band" aria-label="Key product metrics">
-  <div class="container">
-    <div class="trust-head">
-      <p class="trust-kicker">Proven at scale</p>
-    </div>
-
-    <div class="trust-metrics" aria-label="Key product metrics">
-      <div class="metric">
-        <strong>5M+</strong>
-        <span>endpoints secured</span>
-      </div>
-      <div class="metric">
-        <strong>8+ years</strong>
-        <span>in the industry</span>
-      </div>
-      <div class="metric">
-        <strong>100+</strong>
-        <span>countries served</span>
-      </div>
-      <div class="metric">
-        <strong>5000+</strong>
-        <span>organizations worldwide</span>
-      </div>
+<!-- LOGOS BAND -->
+<div class="logos-band">
+  <p class="logos-label">Trusted by leading brands worldwide</p>
+  <div class="logos-track-wrap">
+    <div class="logos-track">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/nhs-logo.svg" alt="NHS">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/kia-logo.svg" alt="Kia">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/sandisk-logo.svg" alt="SanDisk">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/fuji-logo.svg" alt="Fuji">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/doioig-logo.png" alt="DOI OIG">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/panasonic-logo.svg" alt="Panasonic">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/axa-logo.svg" alt="AXA">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/tokio-marine-logo.svg" alt="Tokio Marine">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/unisys-logo.svg" alt="Unisys">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/victoria-police-logo.svg" alt="Victoria Police">
+      <!-- duplicate for seamless loop -->
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/nhs-logo.svg" alt="NHS">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/kia-logo.svg" alt="Kia">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/sandisk-logo.svg" alt="SanDisk">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/fuji-logo.svg" alt="Fuji">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/doioig-logo.png" alt="DOI OIG">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/panasonic-logo.svg" alt="Panasonic">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/axa-logo.svg" alt="AXA">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/tokio-marine-logo.svg" alt="Tokio Marine">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/unisys-logo.svg" alt="Unisys">
+      <img src="https://snehaa-p.github.io/dcp-landing-page/images/victoria-police-logo.svg" alt="Victoria Police">
     </div>
   </div>
-</section>
+</div>
 
-<section class="pricing-compare" id="pricing">
-  <div class="pricing-wrap">
-    <h2 class="pricing-title">Pick the right path to control</h2>
-    <p class="pricing-sub">Start free to validate policies. Upgrade when you’re ready to enforce controls at scale.</p>
-
-    <div class="pricing-grid">
-      <div class="compare-card pill-mode" aria-label="Plans">
-        <div class="plan-pills" role="tablist" aria-label="Choose an edition">
-          <div class="pills-shell">
-            <button class="pill-btn" type="button" role="tab" aria-selected="true"
-              aria-controls="plan-shared" id="pill-free" data-plan="free">
-              Free Edition
-            </button>
-            <button class="pill-btn" type="button" role="tab" aria-selected="false"
-              aria-controls="plan-shared" id="pill-pro" data-plan="pro">
-              Professional Edition
-            </button>
+<section class="capabilities-section" id="features">
+  <div class="cap-header">
+    <h2>Control device access and file transfers to prevent data compromise and device-borne malware.</h2>
+  </div>
+  
+  <div class="cap-container">
+    <div class="cap-sidebar">
+      <button class="cap-tab-btn active" onclick="openCap(event, 'cap1')">
+        <div class="icon">🚫</div>
+        <span>Block USB & Removable Storage</span>
+      </button>
+      <button class="cap-tab-btn" onclick="openCap(event, 'cap2')">
+        <div class="icon">⏱️</div>
+        <span>Just-in-Time Device Access</span>
+      </button>
+      <button class="cap-tab-btn" onclick="openCap(event, 'cap3')">
+        <div class="icon">📂</div>
+        <span>Audit File Transfers (Evidence)</span>
+      </button>
+      <button class="cap-tab-btn" onclick="openCap(event, 'cap4')">
+        <div class="icon">📊</div>
+        <span>Monitor & Audit Activity</span>
+      </button>
+      <button class="cap-tab-btn" onclick="openCap(event, 'cap5')">
+        <div class="icon">📑</div>
+        <span>File-Level Access Control</span>
+      </button>
+      <button class="cap-tab-btn" onclick="openCap(event, 'cap6')">
+        <div class="icon">🔐</div>
+        <span>Enforce USB Encryption</span>
+      </button>
+    </div>
+    
+    <div class="cap-content-area">
+      <div id="cap1" class="cap-pane active">
+        <h3>Block USB & Removable Storage</h3>
+        <p>Prevent unauthorized USB drives and removable media using centralized, policy-driven controls across endpoints.</p>
+        <a href="#" class="learn-more">Learn more →</a>
+        <div class="dashboard-mock">
+          <div class="mock-header"><div class="dot"></div><span>Policy: Zero_Trust_Removable_Media.xml</span></div>
+          <div class="mock-body">
+            <div class="ui-row">
+              <div><strong>USB Flash Drive</strong><br><small>Vendor ID: 0951 (Kingston)</small></div> 
+              <span class="status-pill status-allowed">AUTHORIZED</span>
+            </div>
+            <div class="ui-row">
+              <div><strong>Portable Hard Drive</strong><br><small>Serial: WD-WCC7K1</small></div> 
+              <span class="status-pill status-blocked">BLOCKED</span>
+            </div>
+            <div class="ui-row">
+              <div><strong>Unidentified SSD</strong><br><small>Unknown Serial Number</small></div> 
+              <span class="status-pill status-blocked">BLOCKED</span>
+            </div>
           </div>
         </div>
+      </div>
+      
+      <div id="cap2" class="cap-pane">
+        <h3>Just-in-Time Device Access</h3>
+        <p>Grant time-bound USB access for specific tasks and automatically revoke permissions.</p>
+        <a href="#" class="learn-more">Learn more →</a>
+        <div class="dashboard-mock" style="display:flex; align-items:center; justify-content:center; background:#f9fafb;">
+          <div style="text-align:center; border:2px solid var(--accent); padding:30px; border-radius:15px; background:white; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+            <div style="font-size:11px; font-weight:700; color:var(--text-3); letter-spacing:1px; margin-bottom:8px;">TIME-BOUND PERMISSION ACTIVE</div>
+            <div style="font-size:36px; font-weight:bold; color:var(--navy); font-family: 'DM Mono', monospace;">00:44:12</div>
+            <div style="margin-top:10px; padding:4px 10px; background:var(--teal-dim); color:var(--teal); border-radius:4px; font-size:10px; font-weight:bold;">USER: CONTRACTOR_MARK</div>
+            <div style="font-size:9px; color:#999; margin-top:8px;">Auto-revocation scheduled for 16:00:00</div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="cap3" class="cap-pane">
+        <h3>Audit File Transfers with Evidence</h3>
+        <p>Capture shadow copies of file transfers with timestamps, users, and device context for compliance and investigations.</p>
+        <a href="#" class="learn-more">Learn more →</a>
+        <div class="dashboard-mock">
+          <div class="mock-body">
+            <div style="font-size:10px; font-weight:bold; color:var(--text-2); margin-bottom:12px; display:flex; justify-content:space-between;">
+              <span>LOG: EVIDENCE_RECAP_LOG</span>
+              <span style="color:var(--accent);">STORAGE: \\SECURE-SRV\SHADOW$</span>
+            </div>
+            <table style="width:100%; border-collapse:collapse; font-size:10px; text-align:left;">
+              <thead style="background:#eee;">
+                <tr><th style="padding:6px;">Timestamp</th><th style="padding:6px;">User</th><th style="padding:6px;">Filename</th><th style="padding:6px;">Evidence</th></tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid #eee;">
+                  <td style="padding:6px;">14:02:11</td><td style="padding:6px;">m.smith</td><td style="padding:6px;">Project_Alpha.pdf</td><td style="padding:6px; color:var(--teal); font-weight:bold;">SHADOWED</td>
+                </tr>
+                <tr style="border-bottom:1px solid #eee;">
+                  <td style="padding:6px;">14:15:30</td><td style="padding:6px;">j.doe</td><td style="padding:6px;">Client_PII_List.csv</td><td style="padding:6px; color:var(--teal); font-weight:bold;">SHADOWED</td>
+                </tr>
+                <tr>
+                  <td style="padding:6px;">14:44:02</td><td style="padding:6px;">a.vance</td><td style="padding:6px;">Q4_Forecast.xlsx</td><td style="padding:6px; color:var(--teal); font-weight:bold;">SHADOWED</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
-        <div class="plan-panel" id="plan-shared" role="tabpanel" aria-labelledby="pill-free">
-          <div class="plan-col">
-            <div class="plan-meta">
-              <div>
-                <h3 id="planTitle">Free Edition</h3>
-                <div class="plan-detail" id="planDetail">Free forever · Up to 25 endpoints</div>
+      <div id="cap4" class="cap-pane">
+        <h3>Monitor & Audit Activity</h3>
+        <p>Track device usage, file movements, and user actions in real time to support security monitoring, investigations, and compliance reporting.</p>
+        <a href="#" class="learn-more">Learn more →</a>
+        <div class="dashboard-mock">
+          <div class="mock-body">
+            <div style="font-size:10px; font-weight:bold; color:var(--text-2); margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+              <span>LIVE AUDIT TELEMETRY</span>
+              <span style="display:flex; align-items:center; gap:5px;">
+                <span style="width:8px; height:8px; background:var(--teal); border-radius:50%; display:inline-block; animation: pulse 2s infinite;"></span>
+                <span style="color:var(--teal); font-size:9px;">CONNECTED</span>
+              </span>
+            </div>
+            <table style="width:100%; border-collapse:collapse; font-size:10px; text-align:left; font-family:'DM Mono', monospace;">
+              <thead style="background:var(--surface-2); color:var(--text-2);">
+                <tr>
+                  <th style="padding:8px; border-bottom:1px solid var(--border);">Time</th>
+                  <th style="padding:8px; border-bottom:1px solid var(--border);">User</th>
+                  <th style="padding:8px; border-bottom:1px solid var(--border);">Activity</th>
+                  <th style="padding:8px; border-bottom:1px solid var(--border);">Target Device</th>
+                  <th style="padding:8px; border-bottom:1px solid var(--border);">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid #eee;">
+                  <td style="padding:8px;">13:44:01</td>
+                  <td style="padding:8px;">j.doe</td>
+                  <td style="padding:8px;">Device Connected</td>
+                  <td style="padding:8px;">Cruzer_Edge</td>
+                  <td style="padding:8px;"><span style="color:var(--teal);">Authorized</span></td>
+                </tr>
+                <tr style="border-bottom:1px solid #eee; background:rgba(201, 42, 42, 0.03);">
+                  <td style="padding:8px;">13:44:10</td>
+                  <td style="padding:8px;">j.doe</td>
+                  <td style="padding:8px; font-weight:600;">Write Attempt</td>
+                  <td style="padding:8px;">Restricted Vol G:</td>
+                  <td style="padding:8px;"><span style="color:#c92a2a; font-weight:600;">Blocked</span></td>
+                </tr>
+                <tr style="border-bottom:1px solid #eee;">
+                  <td style="padding:8px;">13:45:22</td>
+                  <td style="padding:8px;">s.vance</td>
+                  <td style="padding:8px;">File Read</td>
+                  <td style="padding:8px;">Kingston_Data</td>
+                  <td style="padding:8px;">Success</td>
+                </tr>
+                <tr>
+                  <td style="padding:8px;">13:46:05</td>
+                  <td style="padding:8px;">admin</td>
+                  <td style="padding:8px;">Policy Update</td>
+                  <td style="padding:8px;">Endpoint-04</td>
+                  <td style="padding:8px; color:var(--accent);">Applied</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div id="cap5" class="cap-pane">
+        <h3>File-Level Access Control</h3>
+        <p>Control read, write, and execute permissions by file type to protect sensitive data formats.</p>
+        <a href="#" class="learn-more">Learn more →</a>
+        <div class="dashboard-mock">
+          <div class="mock-body">
+            <div style="font-size:10px; margin-bottom:10px; color:var(--text-3);">APPLYING PERMISSION FILTER: CORPORATE_SENSITIVE</div>
+            <div class="ui-row">
+              <div><strong>.PDF / .TIFF</strong><br><small>Official Documents</small></div> 
+              <span style="font-weight:bold; color:var(--navy); border:1px solid #ddd; padding:2px 6px; border-radius:4px;">READ ONLY</span>
+            </div>
+            <div class="ui-row">
+              <div><strong>.EXE / .MSI / .BAT</strong><br><small>Executables</small></div> 
+              <span style="color:white; background:#c92a2a; padding:2px 6px; border-radius:4px; font-weight:bold;">BLOCK EXECUTION</span>
+            </div>
+            <div class="ui-row">
+              <div><strong>.DOCX / .XLSX</strong><br><small>Work Files</small></div> 
+              <span style="font-weight:bold; color:var(--teal); border:1px solid var(--teal); padding:2px 6px; border-radius:4px;">FULL ACCESS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="cap6" class="cap-pane">
+        <h3>Enforce USB Encryption</h3>
+        <p>Ensure data is written only to encrypted and compliant USB devices to prevent data leakage.</p>
+        <a href="#" class="learn-more">Learn more →</a>
+        <div class="dashboard-mock" style="background:#fff; border:1px solid var(--border);">
+          <div class="mock-body" style="display:flex; flex-direction:column; justify-content:center; height:100%;">
+              <div style="display:flex; align-items:center; gap:20px; border:1px solid #e1e4e8; padding:20px; border-radius:12px; background:#fcfcfc;">
+                <div style="font-size:44px;">🔐</div>
+                <div>
+                  <div style="font-weight:bold; color:var(--navy); font-size:14px;">COMPLIANCE VERIFICATION</div>
+                  <div style="font-size:10px; color:#666;">Status: <span style="color:var(--teal); font-weight:bold;">ENCRYPTED (AES-256)</span></div>
+                  <div style="font-size:10px; color:#666;">Protocol: <span style="font-weight:bold;">BitLocker-to-Go</span></div>
+                  <div style="margin-top:12px; background:var(--teal); color:white; font-size:10px; padding:4px 8px; border-radius:4px; display:inline-block; font-weight:bold;">MOUNTING AUTHORIZED</div>
+                </div>
               </div>
-              <span class="plan-badge" id="planBadge">$0</span>
-            </div>
-
-            <div class="plan-price">
-              <span class="plan-kicker">STARTS AT</span>
-              <div class="plan-amount-row">
-                <span class="amt" id="planAmt">$0</span>
-                <span class="unit" id="planUnit">up to 25 endpoints</span>
-              </div>
-            </div>
-
-            <div class="plan-divider" aria-hidden="true"></div>
-
-            <ul class="plan-list" aria-label="Included features">
-              <li>Control USB and removable storage</li>
-              <li>Audit device usage and file transfers</li>
-              <li>Restrict device access by user/group</li>
-              <li>Reporting for compliance and investigations</li>
-              <li>Policy-based enforcement</li>
-            </ul>
-
-            <div class="plan-cta-row">
-              <a href="#" class="plan-btn outline" id="planCta">Get started</a>
-            </div>
           </div>
         </div>
-
-        <p class="pricing-footnote" id="pricingFootnote" style="display:none;">
-          The above-mentioned price is for 1000 endpoints. As the number of endpoints increases, the price per endpoint decreases.<br/>
-          For more details on pricing for different endpoint counts, please visit
-          <a href="https://store.manageengine.com/device-control/" target="_blank" rel="noopener">
-            ManageEngine Store
-          </a>
-        </p>
       </div>
-
-      <aside class="pitch-card" aria-label="Endpoint Central Cloud pitch">
-        <div class="pitch-top">
-          <p class="pitch-kicker">Want complete endpoint protection?</p>
-          <h3 class="pitch-title">Explore Endpoint Central</h3>
-
-          <div class="pitch-divider" aria-hidden="true"></div>
-
-          <div class="pitch-block">
-            <div class="pitch-plus">
-              <span class="plus">+</span>
-              <span class="plus-text">Everything in Device Control Plus</span>
-            </div>
-
-            <ul class="pitch-list">
-              <li>Vulnerability management</li>
-              <li>Patch Management</li>
-              <li>Enterprise data security</li>
-              <li>Application and privilege management</li>
-              <li>Endpoint detection and response</li>
-              <li>Enterprise browser security</li>
-              <li>Data loss prevention</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="pitch-bottom">
-          <a class="pitch-btn" href="https://www.manageengine.com/products/desktop-central/cloud/">Explore now</a>
-        </div>
-      </aside>
+    </div>
+  </div>
+</section>
+<!-- INDUSTRY & COMPLIANCE -->
+<section class="industry">
+  <div class="container">
+    <h2 class="section-heading">The Device Control Solution That's Built for Regulated Industries</h2>
+    <p class="section-sub">Device Control Plus helps organizations across industries meet their compliance and security requirements.</p>
+    <div class="industry-grid">
+      <div class="industry-card">
+        <div class="industry-icon">🏥</div>
+        <h3>Healthcare</h3>
+        <p>Protect patient data and maintain compliance with comprehensive device access controls across clinical and administrative endpoints.</p>
+        <div class="compliance-tags"><span class="ctag">HIPAA</span></div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">🏦</div>
+        <h3>Financial Services</h3>
+        <p>Secure customer financial data and meet payment card protection requirements with granular device policies and full audit trails.</p>
+        <div class="compliance-tags"><span class="ctag">PCI-DSS</span></div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">🏛️</div>
+        <h3>Government</h3>
+        <p>Enforce strict device policies for public sector agencies handling classified or sensitive data with role-based controls.</p>
+        <div class="compliance-tags"><span class="ctag">NIST</span><span class="ctag">FISMA</span></div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">⚖️</div>
+        <h3>Legal Institutes</h3>
+        <p>Maintain client confidentiality and attorney-client privilege with robust data protection and endpoint device controls.</p>
+        <div class="compliance-tags"><span class="ctag">GDPR</span></div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">🎓</div>
+        <h3>Education</h3>
+        <p>Protect student records and research data while managing device access across campus networks and remote learning environments.</p>
+        <div class="compliance-tags"><span class="ctag">FERPA</span></div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">🏭</div>
+        <h3>Manufacturing</h3>
+        <p>Safeguard intellectual property, trade secrets, and proprietary designs from unauthorized transfers or insider threats.</p>
+        <div class="compliance-tags"><span class="ctag">ISO 27001</span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="faq-section">
+<!-- DEMO SECTION -->
+<section class="demo-section" id="demo">
+  <div class="container">
+    <div class="demo-inner">
+      <div class="demo-content">
+        
+        <h2>Why IT teams choose Device Control Plus</h2>
+        <ul class="demo-benefits">
+          <li>
+            <div class="benefit-dot">
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>
+            </div>
+            <div>
+              <h4>Zero Data Leakage</h4>
+              <p>Stop sensitive files from leaving on unauthorized USB drives, external disks, or smartphones — intentionally or accidentally.</p>
+            </div>
+          </li>
+          <li>
+            <div class="benefit-dot">
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>
+            </div>
+            <div>
+              <h4>Instant Visibility</h4>
+              <p>Know exactly what devices connect, who's using them, and what files are transferred — in real time.</p>
+            </div>
+          </li>
+          <li>
+            <div class="benefit-dot">
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>
+            </div>
+            <div>
+              <h4>No Blanket Bans</h4>
+              <p>Grant granular access so employees use the devices they need, while blocking everything else.</p>
+            </div>
+          </li>
+          <li>
+            <div class="benefit-dot">
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>
+            </div>
+            <div>
+              <h4>Deploy in Minutes</h4>
+              <p>The lightweight agent installs silently on endpoints — no complex infrastructure required.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="demo-form-wrap">
+        <h3>Request a Personalized Demo</h3>
+        <p>See how Device Control Plus works in your environment. One of our experts will walk you through it.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Work Email</label>
+          <input type="email" placeholder="jane@company.com">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" placeholder="Acme Corp">
+          </div>
+          <div class="form-group">
+            <label>Endpoints</label>
+            <select>
+              <option>1–100</option>
+              <option>101–500</option>
+              <option>501–2,000</option>
+              <option>2,000+</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Industry</label>
+          <select>
+            <option>Select industry</option>
+            <option>Healthcare</option>
+            <option>Financial Services</option>
+            <option>Government</option>
+            <option>Legal</option>
+            <option>Education</option>
+            <option>Manufacturing</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <button class="btn-demo">Request My Demo →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="pricing-wrapper">
+    
+    <div class="comparison-box">
+      <div class="comparison-header">
+        <div class="comp-column">
+          <span class="tier-badge">Free Edition</span>
+          <div class="comp-price">$0 <small>up to 25 endpoints</small></div>
+        </div>
+        <div class="comp-column">
+          <span class="tier-badge">Professional Edition</span>
+          <div class="comp-price">$595 <small>/ 100 endpoints per year</small></div>
+        </div>
+      </div>
+
+      <ul class="comp-features">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Control USB and removable storage</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Audit device usage and file transfers</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Restrict device access by user/group</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Reporting for compliance and investigations</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Policy-based enforcement</li>
+      </ul>
+
+      <div class="comp-actions">
+        <a href="#" class="btn-comp btn-free">Get Started</a>
+        <a href="#" class="btn-comp btn-quote">Get Quote</a>
+      </div>
+    </div>
+
+    <div class="pricing-card-suite">
+      <p class="suite-name">Want complete endpoint protection?</p>
+      <h2 class="suite-price">Explore Endpoint Central</h2>
+      <p class="suite-desc">+ Everything in Device Control Plus</p>
+      
+      <ul class="comp-features">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Vulnerability management</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Patch Management</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Enterprise data security</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Data loss prevention</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Endpoint detection and response</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Enterprise browser security</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Application and privilege management</li>
+      </ul>
+
+      <a href="#" class="btn-comp btn-suite">Explore Endpoint Central</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof">
+  <div class="container">
+    <h2 class="section-heading" style="color:#fff;">Trusted by IT teams worldwide</h2>
+
+    <div class="stats-row" style="margin-top:40px;">
+      <div class="stat-cell">
+        <p class="stat-num">5M+</p>
+        <p class="stat-label">Endpoints secured</p>
+      </div>
+      
+      <div class="stat-cell">
+        <p class="stat-num">100+</p>
+        <p class="stat-label">Countries served</p>
+      </div>
+      <div class="stat-cell">
+        <p class="stat-num">5,000+</p>
+        <p class="stat-label">Organizations worldwide</p>
+      </div>
+    </div>
+
+    <div class="reviews-row">
+      <div class="review-card">
+        <blockquote>"A strong, cost-effective device control solution with solid fundamentals and room to mature!"</blockquote>
+        <p class="reviewer">Manager, IT Security & Risk Management</p>
+      </div>
+      <div class="review-card">
+        <blockquote>"We use it to track USB device usage across all of our devices. We had a person who tried to steal proprietary information and needed a better way to get real-time logging on this to stop it from happening again."</blockquote>
+        <p class="reviewer">Administrator in Information Technology, Machinery Company</p>
+      </div>
+      <div class="review-card">
+        <blockquote>"It enables us to protect our organization data and meet compliance requirements."</blockquote>
+        <p class="reviewer">Amar Y., Manager IT</p>
+      </div>
+    </div>
+
+    <div class="ratings-row">
+  
+  <div class="rating-pill">
+    <img src="images/G2.png" alt="G2" class="rating-logo">
+    <div>
+      <strong>4.8 / 5</strong>
+      
+    </div>
+  </div>
+
+  <div class="rating-pill">
+    <img src="images/Capterra.svg" alt="Capterra" class="rating-logo">
+    <div>
+      <strong>4.7 / 5</strong>
+      
+    </div>
+  </div>
+
+  <div class="rating-pill">
+    <img src="images/gpi.png" alt="GPI" class="rating-logo" style="
+    height: 38px;
+">
+    <div>
+      <strong>4.4 / 5</strong>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" style="
+    margin-top: 38px;
+    margin-bottom: 38px;
+">
   <div class="container">
     <h2>Frequently Asked Questions</h2>
-    <p class="faq-subtext">Answers to common evaluation questions</p>
 
     <div class="faq-carousel">
       <button class="faq-nav prev" type="button" aria-label="Previous FAQ">‹</button>
 
       <div class="faq-track">
+        <div class="faq-item">
+          <h3>What is device control software?</h3>
+          <p>Device control software is a security solution that manages, monitors, and restricts the use of peripheral devices (such as USB drives, external hard drives, and printers) connected to endpoints in an organization. It helps prevent data theft, malware infections, and ensures compliance with data protection regulations by controlling which devices can access corporate systems and what data can be transferred.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>What types of devices can Device Control Plus manage?</h3>
+          <p>Device Control Plus supports 17+ peripheral device types including USB storage devices (flash drives, external HDDs), CD/DVD/Blu-ray drives, printers (local and network), modems, network adapters, Bluetooth devices, imaging devices (scanners, cameras), mobile devices (smartphones, tablets), card readers, wireless adapters, and infrared devices.</p>
+        </div>
+
+        <div class="faq-item active">
+          <h3>What is file shadowing and how does it help security?</h3>
+          <p>File shadowing automatically creates mirror copies of all files transferred to or from external devices. These copies are stored in password-protected network shares, providing a complete audit trail for forensic analysis. If a data breach occurs or unauthorized transfers are detected, security teams can review exactly what data was moved, when, and by whom.</p>
+        </div>
+
         <div class="faq-item active">
           <h3>Does ManageEngine Device Control Plus have a free plan?</h3>
           <p>Yes. Device Control Plus offers a lifetime Free Edition that supports up to 25 devices.</p>
-        </div>
-
-        <div class="faq-item">
-          <h3>Is support available for the Free Edition?</h3>
-          <p>Yes, Device Control Plus provides technical support for the Free Edition, along with access to product documentation and knowledge base resources.</p>
-        </div>
-
-        <div class="faq-item">
-          <h3>Can I audit first before enforcing restrictions?</h3>
-          <p>Yes. Start in audit mode to understand device usage patterns, then enforce policies confidently.</p>
         </div>
 
         
@@ -2123,69 +1599,43 @@ footer{
   </div>
 </section>
 
+
+<!-- FOOTER -->
 <footer>
-  © 2026 Device Control Plus. All rights reserved.
+  <p>© 2026 ManageEngine Device Control Plus. All rights reserved. &nbsp;|&nbsp; <a href="https://www.manageengine.com/privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://www.manageengine.com/device-control/">manageengine.com</a></p>
 </footer>
-
 <script>
-  const carouselEl = document.querySelector(".carousel");
-  const slides = carouselEl.querySelectorAll(".carousel-item");
-  const prevBtn = carouselEl.querySelector(".carousel-btn.prev");
-  const nextBtn = carouselEl.querySelector(".carousel-btn.next");
-  const nav = carouselEl.querySelector(".carousel-nav");
-  let currentIndex = 0;
-
-  function stopAllMedia() {
-    slides.forEach((s) => {
-      const v = s.querySelector("video");
-      if (v) { try { v.pause(); } catch (_) {} }
+document.addEventListener("DOMContentLoaded", function() {
+  /**
+   * Handles the tab switching for the Capabilities Section
+   * @param {Event} evt - The click event
+   * @param {string} capId - The ID of the content pane to show
+   */
+  window.openCap = function(evt, capId) {
+    // 1. Hide all content panes
+    const panes = document.querySelectorAll(".cap-pane");
+    panes.forEach(pane => {
+      pane.classList.remove("active");
     });
-  }
 
-  function playActiveMedia() {
-    const active = slides[currentIndex];
-    const v = active.querySelector("video");
-    if (v) { try { v.play(); } catch (_) {} }
-  }
-
-  function setActive(index) {
-    currentIndex = (index + slides.length) % slides.length;
-
-    slides.forEach((s) => s.classList.remove("active"));
-    slides[currentIndex].classList.add("active");
-
-    const dots = nav.querySelectorAll(".carousel-dot");
-    dots.forEach((d) => d.classList.remove("active"));
-    if (dots[currentIndex]) dots[currentIndex].classList.add("active");
-
-    stopAllMedia();
-    playActiveMedia();
-  }
-
-  function buildNav() {
-    nav.innerHTML = "";
-    slides.forEach((slide, i) => {
-      const label = slide.getAttribute("data-title") || `Slide ${i + 1}`;
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "carousel-dot";
-      btn.setAttribute("aria-label", `Go to ${label}`);
-      btn.innerHTML = `<span class="pill" aria-hidden="true"></span>${label}`;
-      btn.addEventListener("click", () => setActive(i));
-      nav.appendChild(btn);
+    // 2. Remove 'active' state from all sidebar buttons
+    const buttons = document.querySelectorAll(".cap-tab-btn");
+    buttons.forEach(btn => {
+      btn.classList.remove("active");
     });
-  }
 
-  prevBtn.addEventListener("click", () => setActive(currentIndex - 1));
-  nextBtn.addEventListener("click", () => setActive(currentIndex + 1));
+    // 3. Show the requested pane
+    const activePane = document.getElementById(capId);
+    if (activePane) {
+      activePane.classList.add("active");
+    }
 
-  carouselEl.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") setActive(currentIndex - 1);
-    if (e.key === "ArrowRight") setActive(currentIndex + 1);
-  });
-
-  buildNav();
-  setActive(0);
+    // 4. Highlight the clicked button
+    if (evt && evt.currentTarget) {
+      evt.currentTarget.classList.add("active");
+    }
+  };
+});
 
   const faqItems = document.querySelectorAll(".faq-item");
   const faqPrev = document.querySelector(".faq-nav.prev");
@@ -2201,71 +1651,6 @@ footer{
   faqNext.addEventListener("click", () => showFaq(faqIndex + 1));
   faqPrev.addEventListener("click", () => showFaq(faqIndex - 1));
   showFaq(0);
-
-  const pricingPills = document.querySelectorAll(".pill-btn[data-plan]");
-  const planShared = document.getElementById("plan-shared");
-
-  const planTitle  = document.getElementById("planTitle");
-  const planDetail = document.getElementById("planDetail");
-  const planBadge  = document.getElementById("planBadge");
-  const planAmt    = document.getElementById("planAmt");
-  const planUnit   = document.getElementById("planUnit");
-  const planCta    = document.getElementById("planCta");
-
-  const pricingFootnote = document.getElementById("pricingFootnote");
-
-  const plans = {
-    free: {
-      title: "Free Edition",
-      detail: "Free forever · Up to 25 endpoints",
-      badge: "$0",
-      amt: "$0",
-      unit: "up to 25 endpoints",
-      ctaText: "Get started",
-      ctaHref: "#"
-    },
-    pro: {
-      title: "Professional Edition",
-      detail: "Annual Pricing",
-      badge: "$4",
-      amt: "$4",
-      unit: "/endpoint per year",
-      ctaText: "Start free trial",
-      ctaHref: "https://www.manageengine.com/device-control/download.html"
-    }
-  };
-
-  function setPlan(planKey){
-    const p = plans[planKey];
-
-    pricingPills.forEach(btn => {
-      btn.setAttribute("aria-selected", String(btn.dataset.plan === planKey));
-    });
-
-    const activePill = document.querySelector(`.pill-btn[data-plan="${planKey}"]`);
-    if (activePill) planShared.setAttribute("aria-labelledby", activePill.id);
-
-    planTitle.textContent = p.title;
-    planDetail.textContent = p.detail;
-    planBadge.textContent = p.badge;
-    planAmt.textContent = p.amt;
-    planUnit.textContent = p.unit;
-    planCta.textContent = p.ctaText;
-    planCta.href = p.ctaHref;
-
-    planCta.classList.remove("solid", "outline");
-    planCta.classList.add(planKey === "pro" ? "solid" : "outline");
-
-    if (pricingFootnote) {
-      pricingFootnote.style.display = (planKey === "pro") ? "block" : "none";
-    }
-  }
-
-  pricingPills.forEach(btn => {
-    btn.addEventListener("click", () => setPlan(btn.dataset.plan));
-  });
-
-  setPlan("free");
 </script>
 
 </body>
